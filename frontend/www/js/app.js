@@ -1,4 +1,4 @@
-angular.module('playfestApp', ['ionic'])
+var playfestApp = angular.module('playfestApp', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -28,7 +28,8 @@
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "protractor": "^3.3.0"
   },
   "dependencies": {
     "cordova": "^6.1.1",

@@ -7,7 +7,7 @@ To set up:
 3. (if you don't already have these packages installed globally)
   npm install -g .. blah blah..
 4. cd frontend
-5. npm install
+5. npm install && bower install (required for Ionic dependencies)
 
 To run tests:
 1. mocha test/backend
@@ -19,7 +19,7 @@ protractor:
 4. (in a different console tab)
   cd frontend
   ionic serve
-  protractor protractor.conf.js
+  protractor test/protractor.conf.js
 
 To view simulator:
 1. cd frontend

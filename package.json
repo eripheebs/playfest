@@ -23,9 +23,17 @@
     "body-parser": "^1.15.0",
     "chai": "^3.5.0",
     "chai-http": "^2.0.1",
-    "mocha": "^2.4.5"
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "mocha": "^2.4.5",
+    "protractor": "^3.3.0"
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "cordova": "^6.1.1",
+    "express": "^4.13.4",
+    "ionic": "^1.7.14"
   }
 }

@@ -26,6 +26,8 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
-    "express": "^4.13.4"
+    "cordova": "^6.1.1",
+    "express": "^4.13.4",
+    "ionic": "^1.7.14"
   }
 }

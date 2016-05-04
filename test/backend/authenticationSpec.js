@@ -13,11 +13,10 @@ describe('Spotify Authentication', function(){
       chai.request(server)
         .get('/auth/new')
         .end(function(err, res){
-          expect(res.status).to.equal(200);
+          console.log("res.status = "+res.status);
+          expect(res.status).to.equal(300);
           done();
         });
-
     });
   });
-
 });

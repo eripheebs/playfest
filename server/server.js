@@ -6,17 +6,15 @@ var passport = require('passport');
 var SpotifyStrategy = require('passport-spotify').Strategy;
 
 var sendToClientRoutes = require('./routes/sendToClient.js');
+var userAuthentication = require('./routes/authentication.js');
+
 
 var client_id     = "873379a32a354918b0a54f4f79736716";
 var client_secret = "433083b384654bbb84ea7a1712470313";
 
 app.use(passport.initialize());
 app.use('/', sendToClientRoutes);
-
-app.get('/auth/new', function(req, res){
- console.log('Jazzy is the cutest!');
- res.sendStatus(200);
-});
+app.use('/auth', userAuthentication);
 
 
 app.listen(port, function(){

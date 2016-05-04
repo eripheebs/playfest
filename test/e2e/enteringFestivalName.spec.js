@@ -11,7 +11,12 @@ describe('playfestApp', function(){
       expect(browser.getTitle()).toEqual('Playfest App');
     });
 
-  //   it('displays form to write festival name')
+    it('enter festival name and festivalName variable stored', function(){
+      $('#new-festival-input').sendKeys('Glastonbury');
+      $('#new-festival-search').click();
+      var searchedValue = $('#searched-value');
+      expect(searchedValue.getText()).toContain('Glastonbury');
+    })
   })
 
 })

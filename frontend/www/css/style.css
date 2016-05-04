@@ -1,1 +1,13 @@
-/* Empty. Add your own CSS if you like */
+body{
+  margin: auto;
+  text-align: center;
+}
+
+input{
+  margin: 0px auto;
+}
+
+input#new-festival-input{
+  border: 1px solid black;
+  text-align: center;
+}

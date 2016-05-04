@@ -3,4 +3,8 @@ playfestApp.controller('playfestController', function(){
 
   self.festivalName = '';
 
+  self.changeFestivalName = function(newName){
+    self.festivalName = newName;
+  };
+
 })

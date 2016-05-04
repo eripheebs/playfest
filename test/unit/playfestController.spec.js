@@ -13,4 +13,11 @@ describe('playfestController', function(){
     });
   });
 
+  describe('changeFestivalName', function(){
+    it('changes festivalName string', function(){
+      testCtrl.changeFestivalName('Glastonbury');
+      expect(testCtrl.festivalName).toEqual('Glastonbury');
+    });
+  });
+
 })

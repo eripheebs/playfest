@@ -1,5 +1,4 @@
 node_modules
-frontend/hooks
-frontend/scss
 frontend/platforms
 frontend/plugins
+frontend/www/lib/js

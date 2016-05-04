@@ -10,3 +10,10 @@ To set up:
 
 To run tests:
 1. mocha test/backend
+2. karma start test/karma.conf.js
+
+To view simulator:
+1. cd frontend
+$ ionic platform add ios
+$ ionic build ios
+$ ionic emulate ios

@@ -2,21 +2,25 @@ describe('playfestController', function(){
   beforeEach(module('playfestApp'));
 
   var testCtrl;
+  var scope;
 
-  beforeEach(inject(function($controller){
-    testCtrl = $controller('playfestController');
+  beforeEach(inject(function($controller, $rootScope){
+    scope = $rootScope.$new;
+    testCtrl = $controller('playfestController', {
+      $scope: scope
+    });
   }));
 
   describe('initialize', function(){
     it('with an empty string variable festivalName', function(){
-      expect(testCtrl.festivalName).toEqual('');
+      expect(scope.festivalName).toEqual('');
     });
   });
 
   describe('changeFestivalName', function(){
     it('changes festivalName string', function(){
-      testCtrl.changeFestivalName('Glastonbury');
-      expect(testCtrl.festivalName).toEqual('Glastonbury');
+      scope.changeFestivalName('Glastonbury');
+      expect(scope.festivalName).toEqual('Glastonbury');
     });
   });
 

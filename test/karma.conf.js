@@ -4,9 +4,12 @@ module.exports = function(config) {
 
     frameworks: ['jasmine'],
     files: [
-      'frontend/www/lib/angular/angular.js',
-      'frontend/www/lib/angular/angular-mocks/angular-mocks.js',
-      'frontend/www/js/**/*.js',
+      '../frontend/www/lib/angular/angular.js',
+      '../frontend/www/lib/ionic/js/ionic.bundle.js',
+      '../frontend/www/lib/angular-mocks/angular-mocks.js',
+      // '../frontend/www/lib/angular-route/angular-route.js',
+      // '../frontend/www/lib/angular-resource/angular-resource.js',
+      '../frontend/www/js/**/*.js',
       'unit/**/*.js'
     ],
     exclude: [

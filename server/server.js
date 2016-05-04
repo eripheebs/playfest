@@ -10,7 +10,7 @@ var userAuthentication = require('./routes/authentication.js');
 
 
 var client_id     = "873379a32a354918b0a54f4f79736716";
-var client_secret = "433083b384654bbb84ea7a1712470313";
+var client_secret = process.env.CLIENT_SECRET;
 
 app.use(passport.initialize());
 app.use('/', sendToClientRoutes);

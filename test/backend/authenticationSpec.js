@@ -14,7 +14,7 @@ describe('Spotify Authentication', function(){
         .get('/auth/new')
         .end(function(err, res){
           console.log("res.status = "+res.status);
-          expect(res.status).to.equal(300);
+          expect(res.status).to.equal(200);
           done();
         });
     });

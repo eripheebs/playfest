@@ -27,6 +27,9 @@ passport.use(new SpotifyStrategy ({
   callbackURL: "http://localhost:5000/auth/callback"
 },
 function(accessToken, refreshToken, spotifyProfile, done) {
+  console.log('my accessToken = '+accessToken);
+  console.log('my spotify profile id = '+spotifyProfile.id);
+
   return done(null, spotifyProfile);
 }));
 

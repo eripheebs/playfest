@@ -1,16 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-var newPlaylist = require('../modules/spotifyPlaylist.js').newPlaylist;
-var getTrackIDArray = require('../modules/spotifyPlaylist.js').getTrackIDArray;
+var getTracksAndCreatePlaylist = require('../modules/spotifyPlaylist.js').getTracksAndCreatePlaylist;
 
 router.get('/new', function(req, res){
   // songkick API uses res.body.festivalName to get arrayOfArtists
   //res.body.festivalName
-  getTrackIDArray(["Beyonce", "Coldplay"])
-    .then(function(arrayOfArtists){
-      newPlaylist(req.user.userId, req.user.accessToken, "Glastonbury", arrayOfArtists);
-    });
+  getTracksAndCreatePlaylist(["Beyonce", "Coldplay"], req.user.userId, req.user.accessToken, "Glastonbury");
 });
 
 module.exports = router;

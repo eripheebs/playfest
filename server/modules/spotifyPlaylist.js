@@ -12,7 +12,14 @@ var spotifyApi = new SpotifyWebApi({
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
-exports.newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
+exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
+  getTrackIDArray(arrayOfArtists)
+    .then(function(trackIDsArray){
+      newPlaylist(userId, accessToken, festivalName, trackIDsArray);
+    });
+}
+
+newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
   var playlistID = '';
   createPlaylist(username, festivalName+' playlist')
@@ -25,7 +32,7 @@ changeAccessToken = function(accessTok){
   spotifyApi.setAccessToken(accessTok);
 }
 
-exports.getTrackIDArray = function(arrayOfArtists){
+getTrackIDArray = function(arrayOfArtists){
   var trackIDsArray = [];
   var promiseArray = [];
   arrayOfArtists.forEach(function(artist){

@@ -12,15 +12,15 @@ var spotifyApi = new SpotifyWebApi({
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
-exports.newPlaylist = function(username, accessTok, festivalName, arrayOfArtists){
+exports.getListOfTrackIDs = function(arrayOfArtists){
+
+}
+
+exports.newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
   var playlistID = '';
   createPlaylist(username, festivalName+' playlist')
-    .then(function(response){
-      playlistID = response.body.playlistID
-    })
-    .then(getTrackIDArray(arrayOfArtists))
-    .then(function(trackIDsArray){
+    .then(function(playlistID){
       addTracksToPlaylist(username, playlistID, trackIDsArray)
     })
 }
@@ -34,11 +34,13 @@ getTrackIDArray = function(arrayOfArtists){
   arrayOfArtists.forEach(function(artist){
     searchForTracks(artist)
       .then(function(response){
-        console.log(response);
-        trackIDsArray.push(response.body.trackID);
-      });
-  });
-  return trackIDsArray;
+        var songsArray = response.body.tracks.items;
+        songsArray.forEach(function(song){
+          console.log(song);
+          trackIDsArray.push(song.id);
+        })
+      })
+  })
 }
 
 searchForTracks = function (artistName){
@@ -46,7 +48,7 @@ searchForTracks = function (artistName){
     .then(function(data){
       console.log('Search tracks by '+artistName+' in the artist name', data.body);
     }, function(err) {
-      console.error(err);
+      console.error('Something went wrong when searching tracks', err);
     });
 }
 
@@ -54,8 +56,9 @@ createPlaylist = function (username, playlistTitle){
   return spotifyApi.createPlaylist(username, playlistTitle, {'public' : false})
   .then(function(data){
     console.log('Your playlist' +playlistTitle+ 'was created!');
+    return playlistId = data.body.id;
   }, function(err){
-    console.log('Soemthing went wrong!', err);
+    console.log('Something went wrong when creating playlist!', err);
   });
 }
 
@@ -64,6 +67,6 @@ addTracksToPlaylist = function(username, playlistID, trackIDsArray){
     .then(function(data){
       console.log('Added tracks to playlist!');
     }, function(err){
-      console.log('Something went wrong', err);
+      console.log('Something went wrong when adding tracks', err);
     });
 }

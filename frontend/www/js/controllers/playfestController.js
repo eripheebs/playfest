@@ -1,4 +1,4 @@
-playfestApp.controller('playfestController', ['$scope', function($scope){
+playfestApp.controller('playfestController', ['$scope', '$http', function($scope, $http){
 
   $scope.festivalName = '';
 
@@ -6,4 +6,10 @@ playfestApp.controller('playfestController', ['$scope', function($scope){
     $scope.festivalName = newName;
   };
 
-}])
+  this.sendSearchData = function(){
+    $http.post('/http://localhost:5000/request', "hello as a string");
+  };
+
+  console.log("playfestController has loaded. $http = ", $http);
+
+}]);

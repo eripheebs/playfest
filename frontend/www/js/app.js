@@ -10,4 +10,4 @@ var playfestApp = angular.module('playfestApp', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});

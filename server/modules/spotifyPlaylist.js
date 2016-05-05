@@ -1,17 +1,34 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 
+exports.newPlaylist = function(username, festivalName, arrayofArtists){
+  var playlistID = ''
+  var trackIDsArray = [];
+  createPlaylist(username, festivalName+' playlist')
+    .then(function(response){
+      playlistID = response.body.playlistID
+      //we dont know the response
+    })
+    .then(function(){
+      arrayofArtists.forEach(function(artist){
+        searchForTracks(artist)
+          .then(function(response){
+              trackIDsArray.push(response.body.trackID);
+              // we dont yet know what the response looks like
+          });
+      });
+    }).then(function(){
+      addTracksToPlaylist(username, playlistID, trackIDsArray);
+    }
+}
+
 exports.saveAccessTokenForPlaylist = function(accessToken){
   var spotifyApi = new SpotifyWebApi({
     accessToken : accessToken
   });
 }
 
-exports.keepUsersAccessToken = function(accessToken){
-  spotifyApi.setAccessToken(data.body[accessToken]);
-}
-
 exports.searchForTracks = function (artistName){
-  return spotifyApi.searchTracks('artist:'+artistName)
+  spotifyApi.searchTracks('artist:'+artistName)
     .then(function(data){
       console.log('Search tracks by '+artistName+' in the artist name', data.body);
     }, function(err) {
@@ -20,7 +37,7 @@ exports.searchForTracks = function (artistName){
 }
 
 exports.createPlaylist = function (username, playlistTitle){
-  spotifyApi.createPlaylist(username, playlistTitle, {'public' : false})
+  return spotifyApi.createPlaylist(username, playlistTitle, {'public' : false})
   .then(function(data){
     console.log('Your playlist' +playlistTitle+ 'was created!');
   }, function(err){

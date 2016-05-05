@@ -12,10 +12,6 @@ var spotifyApi = new SpotifyWebApi({
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
-exports.getListOfTrackIDs = function(arrayOfArtists){
-
-}
-
 exports.newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
   var playlistID = '';
@@ -29,17 +25,22 @@ changeAccessToken = function(accessTok){
   spotifyApi.setAccessToken(accessTok);
 }
 
-getTrackIDArray = function(arrayOfArtists){
-  trackIDsArray = [];
+exports.getTrackIDArray = function(arrayOfArtists){
+  var trackIDsArray = [];
+  var promiseArray = [];
   arrayOfArtists.forEach(function(artist){
-    searchForTracks(artist)
+    var promise = searchForTracks(artist)
       .then(function(response){
-        var songsArray = response.body.tracks.items;
-        songsArray.forEach(function(song){
-          console.log(song);
-          trackIDsArray.push(song.id);
+        var songsArray = response.tracks.items;
+        songsArray.forEach(function(songData){
+          var song = songData.uri;
+          trackIDsArray.push(song);
         })
       })
+    promiseArray.push(promise);
+  })
+  return Promise.all(promiseArray).then(function(){
+    return trackIDsArray;
   })
 }
 
@@ -47,6 +48,7 @@ searchForTracks = function (artistName){
   return spotifyApi.searchTracks('artist:'+artistName)
     .then(function(data){
       console.log('Search tracks by '+artistName+' in the artist name', data.body);
+      return data.body;
     }, function(err) {
       console.error('Something went wrong when searching tracks', err);
     });

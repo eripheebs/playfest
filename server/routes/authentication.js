@@ -4,8 +4,7 @@ var passport = require('passport');
 
 router.get('/new', passport.authenticate('spotify'));
 
-router.get('/callback', passport.authenticate('spotify', { session: false }), function(req, res){
-  console.log(req.user);
+router.get('/callback', passport.authenticate('spotify'), function(req, res){
   res.redirect('/');
 });
 

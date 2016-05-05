@@ -32,8 +32,12 @@
     "protractor": "^3.3.0"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.1",
     "cordova": "^6.1.1",
     "express": "^4.13.4",
-    "ionic": "^1.7.14"
+    "express-session": "^1.13.0",
+    "ionic": "^1.7.14",
+    "passport": "^0.3.2",
+    "passport-spotify": "^0.3.0"
   }
 }

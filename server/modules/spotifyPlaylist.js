@@ -1,24 +1,7 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 
 exports.newPlaylist = function(username, festivalName, arrayofArtists){
-  var playlistID = ''
-  var trackIDsArray = [];
-  createPlaylist(username, festivalName+' playlist')
-    .then(function(response){
-      playlistID = response.body.playlistID
-      //we dont know the response
-    })
-    .then(function(){
-      arrayofArtists.forEach(function(artist){
-        searchForTracks(artist)
-          .then(function(response){
-              trackIDsArray.push(response.body.trackID);
-              // we dont yet know what the response looks like
-          });
-      });
-    }).then(function(){
-      addTracksToPlaylist(username, playlistID, trackIDsArray);
-    }
+
 }
 
 exports.saveAccessTokenForPlaylist = function(accessToken){

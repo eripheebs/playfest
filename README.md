@@ -26,3 +26,8 @@ To view simulator:
 $ ionic platform add ios
 $ ionic build ios
 $ ionic emulate ios
+
+To run backend:
+1. export to $CLIENT_SECRET the key from spotify
+2. run $ node server/server.js
+3. host will be running on $PORT or 5000 (default)

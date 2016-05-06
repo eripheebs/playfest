@@ -5,22 +5,30 @@ describe('playfestController', function(){
   var scope;
 
   beforeEach(inject(function($controller, $rootScope){
+    var service = jasmine.createSpy('TalkToBackendService', ['getFestivalMatches']);
     scope = $rootScope.$new;
     testCtrl = $controller('playfestController', {
+      getFestivalMatches: service,
       $scope: scope
     });
   }));
 
   describe('initialize', function(){
-    it('with an empty string variable festivalName', function(){
-      expect(scope.festivalName).toEqual('');
+    it('with an empty string variable festivalLocation', function(){
+      expect(scope.festivalLocation).toEqual('');
     });
   });
 
-  describe('changeFestivalName', function(){
-    it('changes festivalName string', function(){
-      scope.changeFestivalName('Glastonbury');
-      expect(scope.festivalName).toEqual('Glastonbury');
+  describe('changeFestivalLocation', function(){
+    it('changes festivalLocation string', function(){
+      scope.changeFestivalLocation('London');
+      expect(scope.festivalLocation).toEqual('London');
+    });
+
+    it('calls on the service to get a confirmation', function(){
+      scope.changeFestivalLocation('London');
+      spyOn(service, 'getFestivalMatches').andCallThrough();
+      expect(service.getFestivalMatches).toHaveBeenCalled();
     });
   });
 

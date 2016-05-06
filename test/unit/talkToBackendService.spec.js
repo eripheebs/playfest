@@ -11,22 +11,27 @@ describe('TalkToBackendService', function(){
     httpBackend = $httpBackend;
   }));
 
-  it('gets back potential festival matches', function(){
-    httpBackend.expectGET("https://localhost/5000/festivalMatches/Sommerset").respond(festivalData);
+  describe('#getFestivalMatches', function(){
+    it('gets back potential festival matches', function(){
+      httpBackend.expectGET("https://localhost/5000/festivalMatches/Sommerset").respond(festivalData);
 
-    TalkToBackendService.getFestivalMatches("Sommerset").then(function(festivals){
-      expect(festivals).toEqual(["Glastonbury", "Glastonburyed"]);
+      TalkToBackendService.getFestivalMatches("Sommerset").then(function(festivals){
+        expect(festivals).toEqual(["Glastonbury", "Glastonburyed"]);
+      });
+      httpBackend.flush();
     });
-    httpBackend.flush();
+
   });
 
-  it('gets back confirmation if playlist is made', function(){
-    httpBackend.expectGET("https://localhost/5000/confirmFestival/Glastonbury").respond(confirmationData);
+  describe('#makePlaylist', function(){
+    it('gets back confirmation if playlist is made', function(){
+      httpBackend.expectGET("https://localhost/5000/confirmFestival/Glastonbury").respond(confirmationData);
 
-    TalkToBackendService.makePlaylist("Glastonbury").then(function(confirmation){
-      expect(confirmation).toEqual("Your playlist has been created!")
+      TalkToBackendService.makePlaylist("Glastonbury").then(function(confirmation){
+        expect(confirmation).toEqual("Your playlist has been created!")
+      });
+      httpBackend.flush();
     });
-    httpBackend.flush();
   });
-
+  
 });

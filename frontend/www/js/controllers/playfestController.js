@@ -1,9 +1,9 @@
 playfestApp.controller('playfestController', ['$scope', function($scope){
 
-  $scope.festivalName = '';
+  $scope.festivalLocation = '';
 
-  $scope.changeFestivalName = function(newName){
-    $scope.festivalName = newName;
+  $scope.changeFestivalLocation = function(newName){
+    $scope.festivalLocation = newName;
   };
 
 }])

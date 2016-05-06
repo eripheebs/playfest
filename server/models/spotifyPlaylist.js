@@ -15,15 +15,13 @@ var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
   fetchSongsFromArtists(arrayOfArtists)
     .then(function(trackIDsArray){
-      var flattenedPlaylist = [].concat.apply([],trackIDsArray);
-      newPlaylist(userId, accessToken, festivalName, flattenedPlaylist);
+      newPlaylist(userId, accessToken, festivalName, [].concat.apply([],trackIDsArray));
     });
 };
 
 newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
-  var playlistID = '';
-  createPlaylist(username, festivalName+' playlist')
+  createPlaylist(username, 'Playfest: '+festivalName)
     .then(function(playlistID){
       addTracksToPlaylist(username, playlistID, trackIDsArray);
     });
@@ -31,25 +29,6 @@ newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
 
 changeAccessToken = function(accessTok){
   spotifyApi.setAccessToken(accessTok);
-};
-
-OLDgetTrackIDArray = function(arrayOfArtists){
-  var trackIDsArray = [];
-  var promiseArray = [];
-  arrayOfArtists.forEach(function(artist){
-    var promise = searchForTracks(artist)
-      .then(function(response){
-        var songsArray = response.tracks.items;
-        songsArray.forEach(function(songData){
-          var song = songData.uri;
-          trackIDsArray.push(song);
-        });
-      });
-    promiseArray.push(promise);
-  });
-  return Promise.all(promiseArray).then(function(){
-    return trackIDsArray;
-  });
 };
 
 fetchSongsFromArtists = function(artists){

@@ -4,6 +4,7 @@ describe('TalkToBackendService', function(){
   var TalkToBackendService, httpBackend;
 
   var festivalData = ["Glastonbury", "Glastonburyed"];
+  var confirmationData = "Your playlist has been created!"
 
   beforeEach(inject(function(_TalkToBackendService_, $httpBackend){
     TalkToBackendService = _TalkToBackendService_;
@@ -15,6 +16,15 @@ describe('TalkToBackendService', function(){
 
     TalkToBackendService.getFestivalMatches("Sommerset").then(function(festivals){
       expect(festivals).toEqual(["Glastonbury", "Glastonburyed"]);
+    });
+    httpBackend.flush();
+  });
+
+  it('gets back confirmation if playlist is made', function(){
+    httpBackend.expectGET("https://localhost/5000/confirmFestival/Glastonbury").respond(confirmationData);
+
+    TalkToBackendService.makePlaylist("Glastonbury").then(function(confirmation){
+      expect(confirmation).toEqual("Your playlist has been created!")
     });
     httpBackend.flush();
   });

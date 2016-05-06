@@ -1,5 +1,5 @@
 describe('TalkToBackendService', function(){
-  beforeEach(module('gitHired'));
+  beforeEach(module('playfestApp'));
 
   var TalkToBackendService, httpBackend;
 
@@ -10,16 +10,13 @@ describe('TalkToBackendService', function(){
     httpBackend = $httpBackend;
   }));
 
-  it('sends location of festival', function(){
-    httpBackend.expectPOST()
-  });
-
   it('gets back potential festival matches', function(){
-    httpBackend.expectGET("https://localhost/5000/festivalMatches").respond(festivalData);
+    httpBackend.expectGET("https://localhost/5000/festivalMatches/Sommerset").respond(festivalData);
 
-    TalkToBackendService.getFestivalMatches("Glastonbury").then(function(festivals){
+    TalkToBackendService.getFestivalMatches("Sommerset").then(function(festivals){
       expect(festivals).toEqual(["Glastonbury", "Glastonburyed"]);
     });
+    httpBackend.flush();
   });
 
 });

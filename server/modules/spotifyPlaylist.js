@@ -54,7 +54,6 @@ getTrackIDArray = function(arrayOfArtists){
 searchForTracks = function (artistName){
   return spotifyApi.searchTracks('artist:'+artistName)
     .then(function(data){
-      console.log('Search tracks by '+artistName+' in the artist name', data.body);
       return data.body;
     }, function(err) {
       console.error('Something went wrong when searching tracks', err);

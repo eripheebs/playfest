@@ -64,7 +64,7 @@ searchForTracks = function (artistName){
 createPlaylist = function (username, playlistTitle){
   return spotifyApi.createPlaylist(username, playlistTitle, {'public' : false})
   .then(function(data){
-    console.log('Your playlist' +playlistTitle+ 'was created!');
+    console.log('Your playlist ' +playlistTitle+ ' was created!');
     return playlistId = data.body.id;
   }, function(err){
     console.log('Something went wrong when creating playlist!', err);

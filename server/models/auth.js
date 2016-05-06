@@ -15,6 +15,7 @@ var initSequence = function() {
   function(accessTok, refreshToken, spotifyProfile, done) {
     var user = {
       displayName: spotifyProfile.displayName,
+      username: spotifyProfile.username,
       userId: spotifyProfile.id,
       accessToken: accessTok
     };

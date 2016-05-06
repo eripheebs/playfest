@@ -70,7 +70,7 @@ parseSongsToUri = function(songList){
 };
 
 getTopArtistTrack = function (artistName){
-  return spotifyApi.searchTracks('artist:'+artistName)
+  return spotifyApi.searchTracks('artist:'+artistName,{limit: 10})
     .then(function(data){
       return data.body;
     }, function(err) {

@@ -38,7 +38,7 @@ fetchSongsFromArtists = function(artists){
 };
 
 fetchArtistTracks = function(artist) {
-  return getTopArtistTrack(artist)
+  return getTopArtistTracks(artist)
     .then(parseSongsToUri);
 };
 
@@ -48,7 +48,7 @@ parseSongsToUri = function(songList){
   });
 };
 
-getTopArtistTrack = function (artistName){
+getTopArtistTracks = function (artistName){
   return spotifyApi.searchTracks('artist:'+artistName,{limit: 10})
     .then(function(data){
       return data.body;

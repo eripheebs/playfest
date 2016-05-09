@@ -1,16 +1,25 @@
 playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', function(TalkToBackendService, $scope){
 
-  $scope.festivalLocation = '';
-  $scope.festivalMatches = [];
+  $scope.playlistName = '';
+  $scope.confirmationData = '';
 
-  $scope.changeFestivalLocation = function(newName){
-    $scope.festivalLocation = newName;
-    TalkToBackendService.getFestivalMatches(newName)
-      .then(_saveFestivalMatches);
+  $scope.changePlaylistName = function(newName){
+    $scope.playlistName = newName;
   };
 
-  function _saveFestivalMatches(response){
-    $scope.festivalMatches.push(response);
+  $scope.createPlaylist = function(data){
+    data.arrayOfArtists = ["beyonce"];
+    TalkToBackendService.makePlaylist(data)
+      .then(_confirmation);
+  }
+
+  $scope.goToAuth = function(){
+    TalkToBackendService.login()
+      .then(_confirmation);
+  }
+
+  function _confirmation(data) {
+    $scope.confirmationData = data;
   }
 
 }])

@@ -8,16 +8,16 @@ var requestForm = {
   }
 };
 
-var stubForm = {
-  url: 'http://test:3000',
-  form: {
-    apikey: ocrKey
-  }
-};
-
 exports.sendUrlToOcr = function(url,callback){
   requestForm.form.url = url;
   request.post(requestForm,function(err,data){
     callback(data.body,err);
   });
+};
+
+exports.parseResponse = function(inputJSON) {
+  return JSON.parse(inputJSON)
+    .ParsedResults[0].ParsedText
+    .match(/\w+/g)
+    .map(function(word){return word.toLowerCase();});
 };

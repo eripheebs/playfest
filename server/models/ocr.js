@@ -10,6 +10,12 @@ var requestForm = {
   }
 };
 
+exports.parseImage = function(url) {
+  sendUrlToOcr(url)
+    .then(parseLines);
+
+};
+
 exports.sendUrlToOcr = function(url){
   return new Promise(function(resolve,reject) {
     requestForm.form.url = url;
@@ -27,7 +33,7 @@ exports.OLDsendUrlToOcr = function(url,callback) {
 };
 
 exports.parseLines = function(inputJSON) {
-  var arr = JSON.parse(inputJSON)
+  return JSON.parse(inputJSON)
     .ParsedResults[0].TextOverlay.Lines
     .map(function(entry){
       var wordList = entry.Words.map(function(word){
@@ -35,16 +41,17 @@ exports.parseLines = function(inputJSON) {
       });
       var obj = {
         size: entry.MaxHeight,
-        words: wordList
+        words: filterArray(wordList)
       };
+
       return obj;
-    });
-  return arr.sort(function(a,b){
-    return parseFloat(b.size) - parseFloat(a.size);
-  });
+      })
+    .sort(function(a,b){
+      return parseFloat(b.size) - parseFloat(a.size);
+      });
 };
 
-exports.filterArray = function(inputArray) {
+filterArray = function(inputArray) {
   return inputArray
     .map(function(entry) {
       return entry.toLowerCase();

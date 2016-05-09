@@ -10,6 +10,17 @@ router.post('/', function(req,res){
 
 router.get('/', function(req,res){
   console.log("test route called");
+
+  var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
+
+  model.sendUrlToOcr(url)
+    .then(function(dump){
+      console.log('promised with', dump);
+      var t = model.parseLines(dump);
+      console.log('back with ', t);
+      res.send(t);
+      console.log('nope.');
+    });
   // spotify.searchForArtist('muse')
   //   .then(function(dump){
   //     console.log(dump);
@@ -24,8 +35,7 @@ router.get('/', function(req,res){
   //     });
   //   });
   // var result;
-  var url = 'https://consequenceofsound.files.wordpress.com/2016/03/glastonbury-2016.png';
-  var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
+  // var url = 'https://consequenceofsound.files.wordpress.com/2016/03/glastonbury-2016.png';
   // model.sendUrlToOcr(url,function(data){
   //   var parsed = model.parseResponse(data);
   //   // res.send(parsed);
@@ -34,17 +44,6 @@ router.get('/', function(req,res){
   //       res.send(result);
   //     });
   // });
-  model.sendUrlToOcr(url)
-    .then(function(dump){
-      var t = model.parseLines(dump);
-      var y = t.map(function(val,ind,arr){
-        return {
-          size: val.size,
-          words: model.filterArray(val.words)
-        };
-      });
-      res.send(y);
-  });
 
 });
 

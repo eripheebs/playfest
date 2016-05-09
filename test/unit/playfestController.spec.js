@@ -3,8 +3,6 @@ describe('playfestController', function(){
 
   var testCtrl, scope, deferred;
 
-  var festivalNames = ["Glastonbury", "Lovebox"]
-
   var service = jasmine.createSpyObj('TalkToBackendService', ['getFestivalMatches']);
 
   beforeEach(inject(function($controller, $rootScope, $q){

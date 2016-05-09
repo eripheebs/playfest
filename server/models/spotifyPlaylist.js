@@ -12,6 +12,13 @@ var spotifyApi = new SpotifyWebApi({
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
+exports.searchForArtist = function(artistName) {
+  return spotifyApi.searchArtists(artistName)
+    .then(function(data){
+      return data.body.artists.items;
+    });
+};
+
 exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
   fetchSongsFromArtists(arrayOfArtists)
     .then(function(trackIDsArray){

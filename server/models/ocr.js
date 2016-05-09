@@ -21,3 +21,9 @@ exports.parseResponse = function(inputJSON) {
     .match(/\w+/g)
     .map(function(word){return word.toLowerCase();});
 };
+
+exports.buildStringArray = function(inputArray) {
+  return inputArray.map(function(val,ind,arr){
+    return arr.slice(0,ind+1).join(' ');
+  }).reverse();
+};

@@ -5,14 +5,33 @@ var spotify = require('../models/spotifyPlaylist.js');
 var requestForm = {
   url: 'https://api.ocr.space/parse/image',
   form: {
-    apikey: ocrKey
+    apikey: ocrKey,
+    isOverlayRequired: true
   }
 };
 
-exports.sendUrlToOcr = function(url,callback){
+exports.sendUrlToOcr = function(url,callback) {
   requestForm.form.url = url;
-  request.post(requestForm,function(err,data){
+  request.post(requestForm,function(err,data) {
     callback(data.body,err);
+  });
+};
+
+exports.parseLines = function(inputJSON) {
+  var arr = JSON.parse(inputJSON)
+    .ParsedResults[0].TextOverlay.Lines
+    .map(function(entry){
+      var wordList = entry.Words.map(function(word){
+        return word.WordText;
+      });
+      var obj = {
+        size: entry.MaxHeight,
+        words: wordList
+      };
+      return obj;
+    });
+  return arr.sort(function(a,b){
+    return parseFloat(b.size) - parseFloat(a.size);
   });
 };
 
@@ -43,8 +62,10 @@ exports.findArtists = function(wordArray,searchLength,nResults,startPoint){
     console.log("queryarr is", queryArray);
     queryArray.forEach(function(queryString,ind,arr){
       var res = spotify.searchForArtist(queryString);
-      // console.log("result lg", res.length);
-      resultArray.push(res);
+      if(res) {
+        resultArray.push(res);
+      }
+
     });
     break;
   }

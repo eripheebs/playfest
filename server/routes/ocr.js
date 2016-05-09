@@ -23,16 +23,21 @@ router.get('/', function(req,res){
   //       console.log("le", ind, " ", val.length);
   //     });
   //   });
-  var result;
+  // var result;
   var url = 'https://d.ibtimes.co.uk/en/full/1494891/reading-leeds-festival-line.jpg';
-  model.sendUrlToOcr(url,function(data){
-    var parsed = model.parseResponse(data);
-    // res.send(parsed);
-    model.findArtists(parsed,4,5,62)
-      .then(function(result){
-        res.send(result);
-      });
+  // model.sendUrlToOcr(url,function(data){
+  //   var parsed = model.parseResponse(data);
+  //   // res.send(parsed);
+  //   model.findArtists(parsed,4,5,62)
+  //     .then(function(result){
+  //       res.send(result);
+  //     });
+  // });
+  model.sendUrlToOcr(url,function(dump){
+    var t = model.parseLines(dump);
+    res.send(t);
   });
+
 });
 
 module.exports = router;

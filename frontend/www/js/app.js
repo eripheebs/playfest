@@ -11,3 +11,7 @@ var playfestApp = angular.module('playfestApp', ['ionic'])
     }
   });
 })
+
+.config(['$httpProvider', function($httpProvider) {
+ $httpProvider.defaults.withCredentials = true;
+}])

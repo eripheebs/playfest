@@ -15,7 +15,7 @@ To run tests:
 protractor:
 1. webdriver-manager update
 2. webdriver-manager start
-3. (in a different console tab) node server/server.js
+3. (in a different console tab) node backend/server.js
 4. (in a different console tab)
   cd frontend
   ionic serve

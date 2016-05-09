@@ -3,12 +3,14 @@ describe('playfestController', function(){
 
   var testCtrl, scope, deferred;
 
-  var service = jasmine.createSpyObj('TalkToBackendService', ['getFestivalMatches']);
+  var service = jasmine.createSpyObj('TalkToBackendService', ['makePlaylist']);
+
+  var festivalNames = ["Glastonbury", "Glastonburyed"]
 
   beforeEach(inject(function($controller, $rootScope, $q){
     scope = $rootScope.$new;
     deferred = $q.defer();
-    service.getFestivalMatches.and.returnValue($q.when(festivalNames));
+    service.makePlaylist.and.returnValue($q.when(festivalNames));
     testCtrl = $controller('playfestController', {
       TalkToBackendService: service,
       $scope: scope
@@ -16,22 +18,22 @@ describe('playfestController', function(){
   }));
 
   describe('initialize', function(){
-    it('with an empty string variable festivalLocation', function(){
-      expect(scope.festivalLocation).toEqual('');
+    it('with an empty string variable playlistName', function(){
+      expect(scope.playlistName).toEqual('');
     });
   });
 
-  describe('changeFestivalLocation', function(){
-    beforeEach(function(){
-      scope.changeFestivalLocation('London');
-    })
-    it('changes festivalLocation string', function(){
-      expect(scope.festivalLocation).toEqual('London');
-    });
-
-    it('calls on the service to get a confirmation', function(){
-      expect(service.getFestivalMatches).toHaveBeenCalledWith('London');
-    });
-  });
+  // describe('changeFestivalLocation', function(){
+  //   beforeEach(function(){
+  //     scope.changeFestivalLocation('London');
+  //   })
+  //   it('changes festivalLocation string', function(){
+  //     expect(scope.festivalLocation).toEqual('London');
+  //   });
+  //
+  //   it('calls on the service to get a confirmation', function(){
+  //     expect(service.getFestivalMatches).toHaveBeenCalledWith('London');
+  //   });
+  // });
 
 })

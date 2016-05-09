@@ -25,7 +25,7 @@ describe('TalkToBackendService', function(){
 
   describe('#makePlaylist', function(){
     it('gets back confirmation if playlist is made', function(){
-      httpBackend.expectGET("https://localhost/5000/confirmFestival/Glastonbury").respond(confirmationData);
+      httpBackend.expectPOST("https://localhost/5000/playlist/new").respond(confirmationData);
 
       TalkToBackendService.makePlaylist("Glastonbury").then(function(confirmation){
         expect(confirmation).toEqual(confirmationData)
@@ -33,5 +33,5 @@ describe('TalkToBackendService', function(){
       httpBackend.flush();
     });
   });
-  
+
 });

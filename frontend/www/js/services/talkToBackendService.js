@@ -10,8 +10,10 @@ playfestApp.service('TalkToBackendService', ['$http', function($http){
     return response.data;
   };
 
-  self.makePlaylist = function(festivalName){
-    return $http.get('https://localhost/5000/confirmFestival/'+festivalName)
+  self.makePlaylist = function(data){
+    return $http.post('https://localhost/5000/playlist/new', data)
     .then(_handleResponseFromApi);
   };
+
+
 }])

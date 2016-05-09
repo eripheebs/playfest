@@ -5,6 +5,8 @@ describe('playfestController', function(){
 
   var service = jasmine.createSpyObj('TalkToBackendService', ['getFestivalMatches']);
 
+  var festivalNames = ["Glastonbury", "Glastonburyed"]
+
   beforeEach(inject(function($controller, $rootScope, $q){
     scope = $rootScope.$new;
     deferred = $q.defer();

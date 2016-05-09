@@ -6,7 +6,7 @@ var getTracksAndCreatePlaylist = require('../models/spotifyPlaylist.js').getTrac
 router.get('/new', function(req, res){
   // songkick API uses res.body.festivalName to get arrayOfArtists
   //res.body.festivalName
-  getTracksAndCreatePlaylist(["Beyonce", "Coldplay"], req.user.userId, req.user.accessToken, "Glastonbury");
+  getTracksAndCreatePlaylist(["Arch Enemy", "In Flames", "Insomnium", "Eskimo Callboy", "The Prodigy", "NOFX", "Slipknot", "Foo Fighters", "Rise Against"], req.user.userId, req.user.accessToken, "Superhot Festival 4");
 });
 
 module.exports = router;

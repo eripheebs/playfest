@@ -24,7 +24,8 @@ router.get('/', function(req,res){
   //     });
   //   });
   // var result;
-  var url = 'https://d.ibtimes.co.uk/en/full/1494891/reading-leeds-festival-line.jpg';
+  var url = 'https://consequenceofsound.files.wordpress.com/2016/03/glastonbury-2016.png';
+  var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
   // model.sendUrlToOcr(url,function(data){
   //   var parsed = model.parseResponse(data);
   //   // res.send(parsed);
@@ -33,9 +34,16 @@ router.get('/', function(req,res){
   //       res.send(result);
   //     });
   // });
-  model.sendUrlToOcr(url,function(dump){
-    var t = model.parseLines(dump);
-    res.send(t);
+  model.sendUrlToOcr(url)
+    .then(function(dump){
+      var t = model.parseLines(dump);
+      var y = t.map(function(val,ind,arr){
+        return {
+          size: val.size,
+          words: model.filterArray(val.words)
+        };
+      });
+      res.send(y);
   });
 
 });

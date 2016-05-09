@@ -1,4 +1,4 @@
-var playfestApp = angular.module('playfestApp', ['ionic'])
+var playfestApp = angular.module('playfestApp', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

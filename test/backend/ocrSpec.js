@@ -16,6 +16,17 @@ describe('OCR recognition via external API', function(){
 
   describe('/ POST route', function(){
 
+    before(function(done){
+      sinon
+        .stub(request, 'post')
+        .returns('hello there');
+      done();
+    });
+
+    after(function(done){
+      request.get.restore();
+    });
+
     it('pass the request to the api', function(){
 
     });

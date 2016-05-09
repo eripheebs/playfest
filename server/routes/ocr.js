@@ -13,14 +13,20 @@ router.get('/', function(req,res){
 
   var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
 
-  model.sendUrlToOcr(url)
-    .then(function(dump){
-      console.log('promised with', dump);
-      var t = model.parseLines(dump);
-      console.log('back with ', t);
-      res.send(t);
-      console.log('nope.');
+  model.parseImage(url)
+    .then(function(output) {
+      res.send(output);
     });
+
+  // model.sendUrlToOcr(url)
+  //   .then(function(dump){
+  //     console.log('promised with', dump);
+  //     var t = model.parseLines(dump);
+  //     console.log('back with ', t);
+  //     res.send(t);
+  //     console.log('nope.');
+  //   });
+  
   // spotify.searchForArtist('muse')
   //   .then(function(dump){
   //     console.log(dump);

@@ -11,12 +11,11 @@ var requestForm = {
 };
 
 exports.parseImage = function(url) {
-  sendUrlToOcr(url)
+  return sendUrlToOcr(url)
     .then(parseLines);
-
 };
 
-exports.sendUrlToOcr = function(url){
+sendUrlToOcr = function(url){
   return new Promise(function(resolve,reject) {
     requestForm.form.url = url;
     request.post(requestForm, function(err, data) {
@@ -32,7 +31,7 @@ exports.OLDsendUrlToOcr = function(url,callback) {
   });
 };
 
-exports.parseLines = function(inputJSON) {
+parseLines = function(inputJSON) {
   return JSON.parse(inputJSON)
     .ParsedResults[0].TextOverlay.Lines
     .map(function(entry){

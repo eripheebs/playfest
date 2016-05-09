@@ -7,7 +7,6 @@ var passport = require('passport');
 var cookeParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var sendToClientRoutes = require('./routes/TalkToFrontend.js');
 var userAuthentication = require('./routes/authentication.js');
 var spotifyWebApi = require('./routes/spotifyPlaylist.js');
 var passportSetup = require('./models/auth.js');

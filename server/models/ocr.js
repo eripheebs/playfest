@@ -24,26 +24,21 @@ sendUrlToOcr = function(url){
   });
 };
 
-exports.OLDsendUrlToOcr = function(url,callback) {
-  requestForm.form.url = url;
-  request.post(requestForm,function(err,data) {
-    callback(data.body,err);
-  });
-};
-
 parseLines = function(inputJSON) {
   return JSON.parse(inputJSON)
     .ParsedResults[0].TextOverlay.Lines
     .map(function(entry){
-      var wordList = entry.Words.map(function(word){
+      var wordList = entry.Words.map(function(word) {
         return word.WordText;
       });
       var obj = {
         size: entry.MaxHeight,
         words: filterArray(wordList)
       };
-
       return obj;
+      })
+    .filter(function(entry) {
+      return entry.words.length > 0;
       })
     .sort(function(a,b){
       return parseFloat(b.size) - parseFloat(a.size);
@@ -62,40 +57,3 @@ filterArray = function(inputArray) {
         entry.replace(/\W/g,'') === entry;
     });
 };
-
-// exports.parseResponse = function(inputJSON) {
-//   return JSON.parse(inputJSON)
-//     .ParsedResults[0].ParsedText
-//     .toLowerCase()
-//     .replace(/(the)|(and)/g,'')
-//     .match(/\w+/g);
-// };
-
-// buildStringArray = function(inputArray) {
-//   return inputArray.map(function(val,ind,arr){
-//     return arr.slice(0,ind+1).join(' ');
-//   }).reverse();
-// };
-//
-// buildString = function(inputArray) {
-//   return arr.join(' ');
-// };
-//
-// exports.findArtists = function(wordArray,searchLength,nResults,startPoint){
-//   console.log("inside findArtists");
-//   var resultArray = [];
-//   while(true) {
-//     console.log("inside while");
-//     var queryArray = buildStringArray(wordArray.slice(startPoint,startPoint+searchLength+1));
-//     console.log("queryarr is", queryArray);
-//     queryArray.forEach(function(queryString,ind,arr){
-//       var res = spotify.searchForArtist(queryString);
-//       if(res) {
-//         resultArray.push(res);
-//       }
-//
-//     });
-//     break;
-//   }
-//   return Promise.all(resultArray);
-// };

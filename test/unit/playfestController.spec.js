@@ -1,26 +1,36 @@
 describe('playfestController', function(){
   beforeEach(module('playfestApp'));
 
-  var testCtrl;
-  var scope;
+  var testCtrl, scope, deferred;
 
-  beforeEach(inject(function($controller, $rootScope){
+  var service = jasmine.createSpyObj('TalkToBackendService', ['getFestivalMatches']);
+
+  beforeEach(inject(function($controller, $rootScope, $q){
     scope = $rootScope.$new;
+    deferred = $q.defer();
+    service.getFestivalMatches.and.returnValue($q.when(festivalNames));
     testCtrl = $controller('playfestController', {
+      TalkToBackendService: service,
       $scope: scope
     });
   }));
 
   describe('initialize', function(){
-    it('with an empty string variable festivalName', function(){
-      expect(scope.festivalName).toEqual('');
+    it('with an empty string variable festivalLocation', function(){
+      expect(scope.festivalLocation).toEqual('');
     });
   });
 
-  describe('changeFestivalName', function(){
-    it('changes festivalName string', function(){
-      scope.changeFestivalName('Glastonbury');
-      expect(scope.festivalName).toEqual('Glastonbury');
+  describe('changeFestivalLocation', function(){
+    beforeEach(function(){
+      scope.changeFestivalLocation('London');
+    })
+    it('changes festivalLocation string', function(){
+      expect(scope.festivalLocation).toEqual('London');
+    });
+
+    it('calls on the service to get a confirmation', function(){
+      expect(service.getFestivalMatches).toHaveBeenCalledWith('London');
     });
   });
 

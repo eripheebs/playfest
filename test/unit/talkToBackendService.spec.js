@@ -16,7 +16,7 @@ describe('TalkToBackendService', function(){
       httpBackend.expectGET("https://localhost/5000/festivalMatches/Sommerset").respond(festivalData);
 
       TalkToBackendService.getFestivalMatches("Sommerset").then(function(festivals){
-        expect(festivals).toEqual(["Glastonbury", "Glastonburyed"]);
+        expect(festivals).toEqual(festivalData);
       });
       httpBackend.flush();
     });

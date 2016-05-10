@@ -1,6 +1,7 @@
 body{
   margin: auto;
   text-align: center;
+  font-family: Quicksand;
 }
 
 input{
@@ -19,4 +20,8 @@ h1{
 
 button{
   font-family: Quicksand;
+}
+
+#create{
+  margin: 20px 20px 20px 20px;
 }

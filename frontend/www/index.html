@@ -11,7 +11,7 @@
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -40,14 +40,14 @@
               <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
             </label>
           </div>
-          <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>
-            CREATE PLAYLIST </button>
+          <div id='picture' ng-controller="pictureCtrl as ctrlr">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <button class="button button-outline button-stable" ng-click="takePicture()">TAKE PICTURE</button>
+          </div>
+          <div id="create" class="buttons">
+          <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
+          </div>
             <p id='confirmation'>{{confirmationData}}</p>
-        </div>
-        <div id='picture' ng-controller="pictureCtrl as ctrlr">
-          <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-          <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
-          <button class="button" ng-click="takePicture()">Take Picture</button>
         </div>
       </ion-content>
     </ion-pane>

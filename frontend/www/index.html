@@ -26,8 +26,8 @@
       <ion-content>
         <div id='playlist' ng-controller='playfestController as ctrl'>
           <a href='http://localhost:5000/auth/new'>Login</a>
-          <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='data.playlistName'/>
-          <button id='new-playlist-button' ng-click='createPlaylist(data)'>
+          <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
+          <button id='new-playlist-button' ng-click='createPlaylist(playlistName)'>
             Create Playlist! </button>
             <p id='confirmation'>{{confirmationData}}</p>
         </div>

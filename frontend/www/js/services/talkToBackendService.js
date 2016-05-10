@@ -13,4 +13,5 @@ playfestApp.service('TalkToBackendService', ['$http', function($http){
   self.login = function(){
     return $http.redirect('http://localhost:5000/auth/new');
   }
+
 }])

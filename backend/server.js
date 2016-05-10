@@ -26,7 +26,6 @@ app.use(function(req, res, next){
   next();
 })
 
-app.use('/', sendToClientRoutes);
 app.use('/auth', userAuthentication);
 app.use('/spotifyPlaylist', spotifyWebApi);
 

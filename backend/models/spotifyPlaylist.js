@@ -32,7 +32,7 @@ exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToke
 
 newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
-  return createPlaylist(username, 'Playfest: '+festivalName)
+  createPlaylist(username, 'Playfest: '+festivalName)
     .then(function(playlistID){
       return addTracksToPlaylist(username, playlistID, trackIDsArray);
     });

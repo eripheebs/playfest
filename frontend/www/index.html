@@ -6,11 +6,12 @@
     <title>Playfest App</title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand">
     <link href="css/style.css" rel="stylesheet">
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -23,21 +24,30 @@
   <body ng-app="playfestApp">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Playfest App</h1>
+      <ion-header-bar class="bar bar-header bar-light">
+        <h1 class="title">PLAYFEST</h1>
+        <div class="buttons">
+          <form action="http://localhost:5000/auth/new">
+            <button class="button">Login</button>
+          </form>
+        </div>
       </ion-header-bar>
       <ion-content>
         <div id='playlist' ng-controller='playfestController as ctrl'>
-          <a href='http://localhost:5000/auth/new'>Login</a>
-          <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
-          <button id='new-playlist-button' ng-click='createPlaylist(playlistName)'>
-            Create Playlist! </button>
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-headphone placeholder-icon"></i>
+              <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
+            </label>
+          </div>
+          <div id='picture' ng-controller="pictureCtrl as ctrlr">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <button class="button button-outline button-stable" ng-click="takePicture()">TAKE PICTURE</button>
+          </div>
+          <div id="create" class="buttons">
+          <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
+          </div>
             <p id='confirmation'>{{confirmationData}}</p>
-        </div>
-        <div id='picture' ng-controller="pictureCtrl as ctrlr">
-          <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-          <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
-          <button class="button" ng-click="takePicture()">Take Picture</button>
         </div>
       </ion-content>
     </ion-pane>

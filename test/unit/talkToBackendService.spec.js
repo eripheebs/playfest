@@ -13,7 +13,7 @@ describe('TalkToBackendService', function(){
 
   describe('#makePlaylist', function(){
     it('gets back confirmation if playlist is made', function(){
-      httpBackend.expectPOST("https://localhost/5000/playlist/new").respond(confirmationData);
+      httpBackend.expectPOST("http://localhost:5000/spotifyPlaylist/new").respond(confirmationData);
 
       TalkToBackendService.makePlaylist("Glastonbury").then(function(confirmation){
         expect(confirmation).toEqual(confirmationData)

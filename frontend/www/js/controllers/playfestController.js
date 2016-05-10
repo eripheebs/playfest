@@ -25,7 +25,7 @@ playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', 
     if (playlistName == null){
       $scope.confirmationData = "You must enter a playlist name";
     } else {
-      $scope.confirmationData = null;
+      $scope.confirmationData = "Making your playlist, please wait...";
       TalkToBackendService.makePlaylist(data)
         .then(_confirmation);
     }

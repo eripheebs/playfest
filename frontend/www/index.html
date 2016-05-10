@@ -10,12 +10,15 @@
     <link href="css/style.css" rel="stylesheet">
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    
+    <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/controllers/playfestController.js"></script>
-    <script src="js/services/TalkToBackendService.js"></script>
+    <script src="js/controllers/pictureController.js"></script>
+    <script src="js/services/talkToBackendService.js"></script>
 
   </head>
   <body ng-app="playfestApp">
@@ -40,6 +43,11 @@
           <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>
             CREATE PLAYLIST </button>
             <p id='confirmation'>{{confirmationData}}</p>
+        </div>
+        <div id='picture' ng-controller="pictureCtrl as ctrlr">
+          <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+          <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
+          <button class="button" ng-click="takePicture()">Take Picture</button>
         </div>
       </ion-content>
     </ion-pane>

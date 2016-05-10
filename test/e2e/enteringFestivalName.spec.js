@@ -11,12 +11,14 @@ describe('playfestApp', function(){
       expect(browser.getTitle()).toEqual('Playfest App');
     });
 
-    it('confirms when a playlist has been created', function(){
-      $('#new-playlist-input').sendKeys('Glastonbury');
-      $('#new-playlist-button').click();
-      var searchedValue = $('#confirmation');
-      expect(searchedValue.getText()).toContain('Your playlist Glastonbury has been made!');
-    })
-  })
+    context('not logged in', function(){
+      it('Tells you to log in if you have not', function(){
+        $('#new-playlist-input').sendKeys('Glastonbury');
+        $('#new-playlist-button').click();
+        var searchedValue = $('#confirmation');
+        expect(searchedValue.getText()).toContain('You must be logged in');
+      });
+    });
+  });
 
-})
+});

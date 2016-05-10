@@ -14,16 +14,17 @@ playfestApp.controller('pictureCtrl', function($scope, $cordovaCamera) {
               saveToPhotoAlbum: false
           };
 
-    $cordovaCamera.getPicture(options).then(function(imageData) {
+    return $cordovaCamera.getPicture(options).then(function(imageData) {
       $scope.imgURI = "data:image/jpeg;base64," + imageData;
-      $upload.upload({
+      return $upload.upload({
                url: 'http://localhost:5000/poster',
                method: 'POST',
                file: imageData,
            }).progress(function(evt) {
                console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-           }).success(function(data, status, headers, config) {
+           }).success(function(response, status, headers, config) {
                console.log("Image uploaded!");
+               return response.data;
            });
     }, function(err) {
       console.log("It isn't working, mate.")

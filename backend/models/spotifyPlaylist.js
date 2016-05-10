@@ -13,62 +13,59 @@ var spotifyApi = new SpotifyWebApi({
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
 exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
-  getTrackIDArray(arrayOfArtists)
+  fetchSongsFromArtists(arrayOfArtists)
     .then(function(trackIDsArray){
-      newPlaylist(userId, accessToken, festivalName, trackIDsArray);
-    });
-}
+      newPlaylist(userId, accessToken, festivalName, [].concat.apply([],trackIDsArray));
+    })
+};
 
 newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
-  var playlistID = '';
-  createPlaylist(username, festivalName+' playlist')
+  createPlaylist(username, 'Playfest: '+festivalName)
     .then(function(playlistID){
-      addTracksToPlaylist(username, playlistID, trackIDsArray)
+      addTracksToPlaylist(username, playlistID, trackIDsArray);
     })
-}
+};
 
 changeAccessToken = function(accessTok){
   spotifyApi.setAccessToken(accessTok);
-}
+};
 
-getTrackIDArray = function(arrayOfArtists){
-  var trackIDsArray = [];
-  var promiseArray = [];
-  arrayOfArtists.forEach(function(artist){
-    var promise = searchForTracks(artist)
-      .then(function(response){
-        var songsArray = response.tracks.items;
-        songsArray.forEach(function(songData){
-          var song = songData.uri;
-          trackIDsArray.push(song);
-        })
-      })
-    promiseArray.push(promise);
-  })
-  return Promise.all(promiseArray).then(function(){
-    return trackIDsArray;
-  })
-}
+fetchSongsFromArtists = function(artists){
+  return Promise.all(artists.map(function(artist){
+    return fetchArtistTracks(artist);
+  }));
+};
 
-searchForTracks = function (artistName){
-  return spotifyApi.searchTracks('artist:'+artistName)
+fetchArtistTracks = function(artist) {
+  return getTopArtistTracks(artist)
+    .then(parseSongsToUri);
+};
+
+parseSongsToUri = function(songList){
+  return songList.tracks.items.map(function(song) {
+    return song.uri;
+  });
+};
+
+getTopArtistTracks = function (artistName){
+  return spotifyApi.searchTracks('artist:'+artistName,{limit: 10})
     .then(function(data){
       return data.body;
     }, function(err) {
       console.error('Something went wrong when searching tracks', err);
     });
-}
+};
 
 createPlaylist = function (username, playlistTitle){
   return spotifyApi.createPlaylist(username, playlistTitle, {'public' : false})
   .then(function(data){
     console.log('Your playlist ' +playlistTitle+ ' was created!');
-    return playlistId = data.body.id;
+    return data.body.id;
   }, function(err){
     console.log('Something went wrong when creating playlist!', err);
   });
-}
+};
 
 addTracksToPlaylist = function(username, playlistID, trackIDsArray){
   spotifyApi.addTracksToPlaylist(username, playlistID, trackIDsArray)
@@ -77,4 +74,4 @@ addTracksToPlaylist = function(username, playlistID, trackIDsArray){
     }, function(err){
       console.log('Something went wrong when adding tracks', err);
     });
-}
+};

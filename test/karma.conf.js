@@ -9,6 +9,7 @@ module.exports = function(config) {
       '../frontend/www/lib/angular-mocks/angular-mocks.js',
       // '../frontend/www/lib/angular-route/angular-route.js',
       // '../frontend/www/lib/angular-resource/angular-resource.js',
+      '../frontend/www/lib/ngCordova/dist/ng-cordova.js',
       '../frontend/www/js/**/*.js',
       'unit/**/*.js'
     ],

@@ -25,8 +25,11 @@ describe('playfestController', function(){
 
   describe('changeFestivalLocation', function(){
     it('calls on the service to get a confirmation', function(){
-      scope.createPlaylist("fakeName")
-      expect(service.getFestivalMatches).toHaveBeenCalledWith({ "playlistName" : "fakeName", "arrayOfArtists" : ["beyonce"] });
+      scope.createPlaylist("fakeName");
+      deferred.resolve('Remote call result');
+      return deferred.promise;
+      expect(service.makePlaylist).toHaveBeenCalledWith({ "playlistName" : "fakeName", "arrayOfArtists" : ["beyonce"] });
+      expect(scope.confirmationData).toEqual(confirmationString);
     });
   });
 

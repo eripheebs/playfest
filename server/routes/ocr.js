@@ -12,12 +12,19 @@ router.post('/', function(req,res){
 router.get('/', function(req,res){
   console.log("THIS IS A DEBUGGING ROUTE");
 
-  var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
-
-  model.parseImage(url)
+  model.searchSpotifyForArtist('lady gaga')
     .then(function(output) {
-      res.send(output);
-    });
+      console.log('resolve');
+        res.send(output);
+      });
+
+  // var url = 'http://www.neverenoughnotes.co.uk/wp-content/uploads/2015/12/Download-2016-December-Announcement-1000x1000_No-Website.jpg';
+  //
+  // model.parseImage(url)
+  //   .then(function(output) {
+  //     res.send(output);
+  //   });
+
 });
 
 module.exports = router;

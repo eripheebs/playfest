@@ -10,12 +10,31 @@ var requestForm = {
   }
 };
 
+exports.searchSpotifyForArtist = function(query) {
+  return spotify.searchForArtist(query);
+};
+
 exports.parseImage = function(url) {
   return sendUrlToOcr(url)
     .then(parseLines);
 };
 
-sendUrlToOcr = function(url){
+filterDate = function(blob) {
+  blob.some(function(val,ind,arr) {
+    if(containsDate(val)) {
+      var possibleDate = arr.splice(ind,1);
+      return true;
+    }
+  });
+};
+
+containsDate = function(sentence) {
+  return sentence.words.some(function(value) {
+    return DATES.includes(value);
+  });
+};
+
+sendUrlToOcr = function(url) {
   return new Promise(function(resolve,reject) {
     requestForm.form.url = url;
     request.post(requestForm, function(err, data) {

@@ -5,12 +5,12 @@ describe('playfestController', function(){
 
   var service = jasmine.createSpyObj('TalkToBackendService', ['makePlaylist']);
 
-  var festivalNames = ["Glastonbury", "Glastonburyed"]
+  var confirmationString = "Your playlist has been created!"
 
   beforeEach(inject(function($controller, $rootScope, $q){
     scope = $rootScope.$new;
     deferred = $q.defer();
-    service.makePlaylist.and.returnValue($q.when(festivalNames));
+    service.makePlaylist.and.returnValue($q.when(confirmationString));
     testCtrl = $controller('playfestController', {
       TalkToBackendService: service,
       $scope: scope
@@ -23,17 +23,11 @@ describe('playfestController', function(){
     });
   });
 
-  // describe('changeFestivalLocation', function(){
-  //   beforeEach(function(){
-  //     scope.changeFestivalLocation('London');
-  //   })
-  //   it('changes festivalLocation string', function(){
-  //     expect(scope.festivalLocation).toEqual('London');
-  //   });
-  //
-  //   it('calls on the service to get a confirmation', function(){
-  //     expect(service.getFestivalMatches).toHaveBeenCalledWith('London');
-  //   });
-  // });
+  describe('changeFestivalLocation', function(){
+    it('calls on the service to get a confirmation', function(){
+      scope.createPlaylist("fakeName")
+      expect(service.getFestivalMatches).toHaveBeenCalledWith({ "playlistName" : "fakeName", "arrayOfArtists" : ["beyonce"] });
+    });
+  });
 
 })

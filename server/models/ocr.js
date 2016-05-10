@@ -10,7 +10,74 @@ var requestForm = {
   }
 };
 
-exports.searchSpotifyForArtist = function(query) {
+exports.testSearch = function(data){
+  return searchForAllArtists(data);
+}
+
+searchForAllArtists = function(data){
+  return Promise.all(data.map(function(value, index, array){
+    return searchAPIForArtist(value.words);
+  }));
+};
+
+// searchArtists = function(arrayOfWords, original) {
+//   console.log("calling searchArtists with", arrayOfWords, original);
+//   if(arrayOfWords < 1){
+//     return [];
+//   }
+//   var possibleArtistString = buildString(arrayOfWords);
+//   return searchSpotifyForArtist(possibleArtistString)
+//     .then(function(result){
+//       if(result !== []){
+//         console.log("result found!", result);
+//         var newOriginalArray = original.slice(arrayOfWords.length);
+//         return searchArtists(newOriginalArray, newOriginalArray)
+//         .then(function(nextResult){
+//           var temp = nextResult.push(result);
+//           console.log(temp);
+//           return temp;
+//         });
+//       }else{
+//         console.log("no result found");
+//         if(arrayOfWords.length === 1){
+//           console.log("down to one word", arrayOfWords);
+//           var newOriginalArray = original.slice(1);
+//           return searchArtists(newOriginalArray, newOriginalArray);
+//         }
+//         var newSearchArray = arrayOfWords.slice(-1)
+//         return searchArtist(newSearchArray, original);
+//       };
+//     });
+// };
+
+searchAPIForArtist = function(array){
+  if(array.length < 1){
+      return null;
+    }
+  console.log("testing with", array);
+  var possibleArtistString = buildString(array);
+  return searchSpotifyForArtist(possibleArtistString)
+    .then(function(result){
+      if(result.length){
+        // console.log("results found", result[0]);
+        return result[0];
+      }else{
+        return searchAPIForArtist(array.slice(0, -1));
+      }
+    });
+};
+
+buildString = function(array){
+  return array.join(" ");
+}
+
+buildTestString = function(array){
+  return array.map(function(value, index, array){
+    return array.slice(0, index+1).join(" ");
+  }).reverse();
+};
+
+searchSpotifyForArtist = function(query) {
   return spotify.searchForArtist(query);
 };
 

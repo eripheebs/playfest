@@ -10,17 +10,24 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : clientSecret
 });
 
-var confirmationString = "Your playlist has been created!"
-var playlistError = "Something went wrong when creating playlist!"
-var addTracksError = "Something went wrong when adding tracks"
+var confirmationString = "Your playlist has been created!";
+var playlistError = "Something went wrong when creating playlist!";
+var addTracksError = "Something went wrong when adding tracks";
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
+
+exports.searchForArtist = function(artistName) {
+  return spotifyApi.searchArtists(artistName)
+    .then(function(data){
+      return data.body.artists.items;
+    });
+};
 
 exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
   return fetchSongsFromArtists(arrayOfArtists)
     .then(function(trackIDsArray){
       return newPlaylist(userId, accessToken, festivalName, [].concat.apply([],trackIDsArray));
-    })
+    });
 };
 
 newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
@@ -28,7 +35,7 @@ newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   return createPlaylist(username, 'Playfest: '+festivalName)
     .then(function(playlistID){
       return addTracksToPlaylist(username, playlistID, trackIDsArray);
-    })
+    });
 };
 
 changeAccessToken = function(accessTok){

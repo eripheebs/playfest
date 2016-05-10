@@ -3,7 +3,7 @@ var chaiHttp = require('chai-http');
 var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 var expect = chai.expect;
-var server = require('../../server/server.js');
+var server = require('../../backend/server.js');
 
 chai.use(sinonChai);
 chai.use(chaiHttp);

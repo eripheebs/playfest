@@ -11,8 +11,8 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 var confirmationString = "Your playlist has been created!"
-var errorString1 = "Something went wrong when creating playlist!"
-var errorString2 = "Something went wrong when adding tracks"
+var playlistError = "Something went wrong when creating playlist!"
+var addTracksError = "Something went wrong when adding tracks"
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
@@ -68,7 +68,7 @@ createPlaylist = function (username, playlistTitle){
     return data.body.id;
   }, function(err){
     console.log('Something went wrong when creating playlist!', err);
-    return errorString1;
+    return playlistError;
   });
 };
 
@@ -79,6 +79,6 @@ addTracksToPlaylist = function(username, playlistID, trackIDsArray){
       return confirmationString;
     }, function(err){
       console.log('Something went wrong when adding tracks', err);
-      return errorString2;
+      return addTracksError;
     });
 };

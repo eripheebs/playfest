@@ -18,8 +18,8 @@ describe('playfestController', function(){
   }));
 
   describe('initialize', function(){
-    it('with an empty string variable playlistName', function(){
-      expect(scope.playlistName).toEqual('');
+    it('with an empty string variable confirmationData', function(){
+      expect(scope.confirmationData).toEqual('');
     });
   });
 

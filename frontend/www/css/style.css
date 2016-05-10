@@ -5,9 +5,18 @@ body{
 
 input{
   margin: 0px auto;
+  font-family: Quicksand;
 }
 
 input#new-festival-input{
   border: 1px solid black;
   text-align: center;
+}
+
+h1{
+  font-family: Quicksand;
+}
+
+button{
+  font-family: Quicksand;
 }

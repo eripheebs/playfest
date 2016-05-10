@@ -5,7 +5,7 @@ playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', 
   $scope.createPlaylist = function(playlistName){
     arrayOfArtists = ["beyonce"];
     var data = _makeHash(playlistName, arrayOfArtists)
-    _checkIfNamed(playlistName);
+    _checkIfNamed(playlistName, data);
   }
 
   $scope.goToAuth = function(){
@@ -21,7 +21,7 @@ playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', 
     return { "playlistName" : playlistName, "arrayOfArtists" : arrayOfArtists };
   }
 
-  function _checkIfNamed(playlistName){
+  function _checkIfNamed(playlistName, data){
     if (playlistName == null){
       $scope.confirmationData = "You must enter a playlist name";
     } else {

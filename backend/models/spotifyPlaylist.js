@@ -10,20 +10,24 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : clientSecret
 });
 
+var confirmationString = "Your playlist has been created!"
+var errorString1 = "Something went wrong when creating playlist!"
+var errorString2 = "Something went wrong when adding tracks"
+
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
 exports.getTracksAndCreatePlaylist = function(arrayOfArtists, userId, accessToken, festivalName){
-  fetchSongsFromArtists(arrayOfArtists)
+  return fetchSongsFromArtists(arrayOfArtists)
     .then(function(trackIDsArray){
-      newPlaylist(userId, accessToken, festivalName, [].concat.apply([],trackIDsArray));
+      return newPlaylist(userId, accessToken, festivalName, [].concat.apply([],trackIDsArray));
     })
 };
 
 newPlaylist = function(username, accessTok, festivalName, trackIDsArray){
   changeAccessToken(accessTok);
-  createPlaylist(username, 'Playfest: '+festivalName)
+  return createPlaylist(username, 'Playfest: '+festivalName)
     .then(function(playlistID){
-      addTracksToPlaylist(username, playlistID, trackIDsArray);
+      return addTracksToPlaylist(username, playlistID, trackIDsArray);
     })
 };
 
@@ -64,14 +68,17 @@ createPlaylist = function (username, playlistTitle){
     return data.body.id;
   }, function(err){
     console.log('Something went wrong when creating playlist!', err);
+    return errorString1;
   });
 };
 
 addTracksToPlaylist = function(username, playlistID, trackIDsArray){
-  spotifyApi.addTracksToPlaylist(username, playlistID, trackIDsArray)
+  return spotifyApi.addTracksToPlaylist(username, playlistID, trackIDsArray)
     .then(function(data){
       console.log('Added tracks to playlist!');
+      return confirmationString;
     }, function(err){
       console.log('Something went wrong when adding tracks', err);
+      return errorString2;
     });
 };

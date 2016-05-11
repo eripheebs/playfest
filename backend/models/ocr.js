@@ -5,25 +5,41 @@ var spotify = require('../models/spotifyPlaylist.js');
 var ocrUrl = 'https://api.ocr.space/parse/image';
 
 exports.parseImage = function(url) {
-  return _parseImageFiletoBlob(url)
-    .then(function(blob) {
-      var firstGroup = blob.slice(0,10);
-      return _searchForArtistNames(firstGroup)
-        .then(function(list) {
-          return list.map(function(val) {
-            return val.name;
-          });
-        });
+  return _parseImageFiletoWords(url)
+    .then(_searchFirstTenArtistsNames);
+};
+
+_searchFirstTenArtistsNames = function(data) {
+  return _searchForArtists(data.slice(1,10))
+    .then(function(list) {
+      return list.map(function(val) {
+        return val.name;
+      });
     });
 };
 
-_searchForArtistNames = function(data) {
+_searchForArtists = function(data) {
   return Promise.all(data.map(function(val){
-    return searchAPIForArtist(val.words);
+    return _searchAPIForArtist(val.words);
   }));
 };
 
-_parseImageFiletoBlob = function(file) {
+_searchAPIForArtist = function(array){
+  if(array.length < 1){
+      return null;
+    }
+  return spotify.searchForArtist(array.join(" "))
+    .then(function(result){
+      if(result.length){
+        return result[0];
+      }else{
+        return _searchAPIForArtist(array.slice(0, -1));
+      }
+    });
+};
+
+
+_parseImageFiletoWords = function(file) {
   return _sendFileToOcr(file)
     .then(_parseLines);
 };
@@ -59,114 +75,17 @@ _parseLines = function(inputJSON) {
       var wordList = entry.Words.map(function(word) {
         return word.WordText;
       });
-      var obj = {
-        size: entry.MaxHeight,
-        words: filterArray(wordList)
-      };
-      return obj;
-      })
+      return { size: entry.MaxHeight, words: _filterArray(wordList) };
+    })
     .filter(function(entry) {
       return entry.words.length > 0;
-      })
+    })
     .sort(function(a,b){
       return parseFloat(b.size) - parseFloat(a.size);
-      });
-};
-
-//////////////////////////old//////////////////////////
-sendUrlToOcr = function(url) {
-  return new Promise(function(resolve,reject) {
-    requestForm.form.url = url;
-    request.post(requestForm, function(err, data) {
-      resolve(data.body);
-    });
-  });
-};
-
-
-
-exports.parseImageFile = function(file) {
-  console.log('inside parse 1', file);
-  return parseImageFiletoBlob(file)
-    .then(function(blob) {
-      var firstGroup = blob.slice(0,10);
-      return searchForAllArtists(firstGroup)
-        .then(function(list) {
-          return list.map(function(val) {
-            return val.name;
-          });
-        });
     });
 };
 
-parseImagetoBlob = function(url) {
-  return sendUrlToOcr(url)
-    .then(parseLines);
-};
-
-
-searchForAllArtists = function(data){
-  return Promise.all(data.map(function(value, index, array){
-    return searchAPIForArtist(value.words);
-  }));
-};
-
-searchAPIForArtist = function(array){
-  if(array.length < 1){
-      return null;
-    }
-  var possibleArtistString = buildString(array);
-  return searchSpotifyForArtist(possibleArtistString)
-    .then(function(result){
-      if(result.length){
-        return result[0];
-      }else{
-        return searchAPIForArtist(array.slice(0, -1));
-      }
-    });
-};
-
-buildString = function(array){
-  return array.join(" ");
-};
-
-buildTestString = function(array){
-  return array.map(function(value, index, array){
-    return array.slice(0, index+1).join(" ");
-  }).reverse();
-};
-
-searchSpotifyForArtist = function(query) {
-  return spotify.searchForArtist(query);
-};
-
-
-
-filterDate = function(blob) {
-  blob.some(function(val,ind,arr) {
-    if(containsDate(val)) {
-      var possibleDate = arr.splice(ind,1);
-      return true;
-    }
-  });
-};
-
-containsDate = function(sentence) {
-  return sentence.words.some(function(value) {
-    return DATES.includes(value);
-  });
-};
-
-sendUrlToOcr = function(url) {
-  return new Promise(function(resolve,reject) {
-    requestForm.form.url = url;
-    request.post(requestForm, function(err, data) {
-      resolve(data.body);
-    });
-  });
-};
-
-filterArray = function(inputArray) {
+_filterArray = function(inputArray) {
   return inputArray
     .map(function(entry) {
       return entry.toLowerCase();

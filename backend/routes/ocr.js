@@ -8,42 +8,11 @@ var request = require('request');
 var ocrKey = process.env.OCR_KEY;
 var rest = require('restler');
 
-var requestForm = {
-  url: 'https://api.ocr.space/parse/image',
-  // url: 'http://localhost:5000/poster/test',
-  formData: {
-    apikey: ocrKey,
-    isOverlayRequired: 'true'
-  }
-};
-
 router.post('/',upload.single('poster'), function(req,res){
-  // console.log("start", req.file);
-  var r = request.post(requestForm.url, function (err,data) {
-    console.log("request done");
-    res.status(200).send(data.body);
-  });
-  var form = r.form();
-  form.append('file', req.file.buffer, {
-    filename: req.file.originalname,
-    contentType: req.file.mimetype
-  });
-  form.append('apikey',ocrKey);
-  form.append('isOverlayRequired', 'true');
-  // var form = new FormData();
-  // form.append('apikey',ocrKey);
-  // form.append('file',req.file.buffer);
-  // form.submit('http://localhost:5000/poster/test',function(e,d){});
-  // requestForm.formData.file = req.file;
-  // request.post(requestForm,function(e,d){});
-  //   rest.post(requestForm.url, {
-  //   multipart: true,
-  //   apikey: ocrKey,
-  //   isOverlayRequired: 'true',
-  //   file: req.file.buffer
-  // }).on('complete', function(data) {
-  //   console.log('done');
-
+  model.sendFileToOcr(req.file)
+    .then(function(data){
+      console.log("return!", data);
+    });
 });
 
 

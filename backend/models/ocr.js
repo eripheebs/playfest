@@ -2,20 +2,34 @@ var request = require('request');
 var ocrKey = process.env.OCR_KEY;
 var spotify = require('../models/spotifyPlaylist.js');
 
-var requestForm = {
-  url: 'https://api.ocr.space/parse/image',
-  formData: {
-    apikey: ocrKey,
-    isOverlayRequired: 'true'
-  }
+var ocrUrl = 'https://api.ocr.space/parse/image';
+
+
+exports.sendFileToOcr = function(file) {
+  return new Promise(function(resolve,reject) {
+    _sendToOcr(file,resolve);
+  });
 };
 
-sendFileToOcr = function(file) {
-  console.log('ocr', file);
+_sendToOcr = function(file,callback) {
+  var form = request.post(ocrUrl,function(err,data){
+    callback(data.body);
+  }).form();
+  _buildRequest(file,form);
+};
+
+_buildRequest = function(file, form) {
+  form.append('file', file.buffer, {
+    filename: file.originalname,
+    contentType: file.mimetype
+  });
+  form.append('apikey', ocrKey);
+  form.append('isOverlayRequired', 'true');
+};
+
+sendUrlToOcr = function(url) {
   return new Promise(function(resolve,reject) {
-    console.log('inside sendfile1, form', requestForm);
-    requestForm.formData.file = file;
-    console.log('inside sendfile2, form', requestForm);
+    requestForm.form.url = url;
     request.post(requestForm, function(err, data) {
       resolve(data.body);
     });

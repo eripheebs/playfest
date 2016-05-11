@@ -18,6 +18,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/playfestController.js"></script>
     <script src="js/controllers/pictureController.js"></script>
+    <script src="js/controllers/goToSpotifyController.js"></script>
     <script src="js/services/talkToBackendService.js"></script>
 
   </head>
@@ -48,6 +49,12 @@
           <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
           </div>
             <p id='confirmation'>{{confirmationData}}</p>
+        </div>
+        <div ng-controller='goToSpotifyController as spotCtrl'>
+          <button class="button button-outline button-balanced" ng-click="launchSpotify()">
+            <i class="ion-ios-musical-notes"></i>
+            GO TO SPOTIFY
+          </button>
         </div>
       </ion-content>
     </ion-pane>

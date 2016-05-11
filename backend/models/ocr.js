@@ -20,7 +20,7 @@ _searchFirstTenArtistsNames = function(data) {
 
 _searchForArtists = function(data) {
   return Promise.all(data.map(function(val){
-    return _searchAPIForArtist(val.words);
+    return _searchAPIForArtist(val.words.slice(0,3));
   }));
 };
 

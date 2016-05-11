@@ -8,8 +8,6 @@ var server = require('../../server/server.js');
 chai.use(sinonChai);
 chai.use(chaiHttp);
 
-
-
 describe('OCR recognition via external API', function(){
 
   //routes:post

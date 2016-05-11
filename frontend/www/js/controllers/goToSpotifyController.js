@@ -8,7 +8,6 @@ playfestApp.controller('goToSpotifyController', function($scope, $cordovaInAppBr
 
   $scope.launchSpotify = function(){
     var scheme;
-    console.log(device.platform);
 
     if(device.platform === 'iOS') {
         scheme = 'spotify://';

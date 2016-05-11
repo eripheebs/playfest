@@ -5,6 +5,7 @@ var scopes = ['playlist-read-private', 'playlist-modify-public', 'playlist-modif
   clientSecret = process.env.CLIENT_SECRET,
   state = 'jazz-and-eri-women-powahhh';
 
+
 var spotifyApi = new SpotifyWebApi({
   clientId : clientId,
   clientSecret : clientSecret
@@ -89,3 +90,5 @@ addTracksToPlaylist = function(username, playlistID, trackIDsArray){
       return addTracksError;
     });
 };
+
+exports.spotifyApi = spotifyApi;

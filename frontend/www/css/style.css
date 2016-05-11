@@ -8,9 +8,17 @@ body{
   background: -webkit-linear-gradient(left, #F8B195, #355C7D);
 }
 
+.item.item-input{
+  background: rgba(225, 225, 225, .2);
+}
+
 .bar.bar-header.bar-light{
   height: 50px;
   background: rgba(225, 225, 225, .5);
+}
+
+.logo{
+  padding-left: 63%;
 }
 
 .button.button-stable.button-outline{
@@ -18,6 +26,7 @@ body{
   color: black;
   border: 1px solid black;
   text-align: center;
+  opacity: 0.5;
 }
 
 h1{
@@ -35,12 +44,13 @@ h1{
   overflow: hidden;
 }
 
-.button{
-  font-family: Avenir, sans-serif;
-  border: 4px solid black;
-  text-align: center;
-}
 
 #create{
   margin: 20px 20px 20px 20px;
+}
+
+#confirmation{
+  font-family: Avenir, sans-serif;
+  color: black;
+  opacity: 0.5;
 }

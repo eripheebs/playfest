@@ -40,9 +40,9 @@
               <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
             </label>
           </div>
-          <div id='picture' ng-controller="pictureCtrl as ctrlr">
+          <div id='picture' ng-controller="pictureCtrl as picCtrlr">
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-            <button class="button button-outline button-stable" ng-click="takePicture()">TAKE PICTURE</button>
+            <button class="button button-outline button-stable" ng-click="picCtrlr.takePicture().then(ctrl.addArrayVar)">TAKE PICTURE</button>
           </div>
           <div id="create" class="buttons">
           <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>

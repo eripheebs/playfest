@@ -4,10 +4,22 @@ var spotify = require('../models/spotifyPlaylist.js');
 
 var requestForm = {
   url: 'https://api.ocr.space/parse/image',
-  form: {
+  formData: {
     apikey: ocrKey,
-    isOverlayRequired: true
+    isOverlayRequired: 'true'
   }
+};
+
+sendFileToOcr = function(file) {
+  console.log('ocr', file);
+  return new Promise(function(resolve,reject) {
+    console.log('inside sendfile1, form', requestForm);
+    requestForm.formData.file = file;
+    console.log('inside sendfile2, form', requestForm);
+    request.post(requestForm, function(err, data) {
+      resolve(data.body);
+    });
+  });
 };
 
 exports.parseImage = function(url) {
@@ -23,8 +35,28 @@ exports.parseImage = function(url) {
     });
 };
 
+exports.parseImageFile = function(file) {
+  console.log('inside parse 1', file);
+  return parseImageFiletoBlob(file)
+    .then(function(blob) {
+      var firstGroup = blob.slice(0,10);
+      return searchForAllArtists(firstGroup)
+        .then(function(list) {
+          return list.map(function(val) {
+            return val.name;
+          });
+        });
+    });
+};
+
 parseImagetoBlob = function(url) {
   return sendUrlToOcr(url)
+    .then(parseLines);
+};
+
+parseImageFiletoBlob = function(file) {
+  console.log('inside parsetoblob',file);
+  return sendFileToOcr(file)
     .then(parseLines);
 };
 
@@ -90,6 +122,7 @@ sendUrlToOcr = function(url) {
 };
 
 parseLines = function(inputJSON) {
+  console.log('inside parseline', inputJSON);
   return JSON.parse(inputJSON)
     .ParsedResults[0].TextOverlay.Lines
     .map(function(entry){

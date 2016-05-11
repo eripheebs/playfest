@@ -13,8 +13,8 @@ describe('Spotify Authentication', function(){
       chai.request(server)
         .get('/auth/new')
         .end(function(err, res){
-          console.log("res.status = "+res.status);
           expect(res.status).to.equal(200);
+          expect(res.header['set-cookie'][0]).to.include('spotify')
           done();
         });
     });

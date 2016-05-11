@@ -1,8 +1,8 @@
 var request = require('request');
-var ocrKey = process.env.OCR_KEY;
 var spotify = require('../models/spotifyPlaylist.js');
 
 var ocrUrl = 'https://api.ocr.space/parse/image';
+var ocrKey = process.env.OCR_KEY;
 
 exports.parseImage = function(url) {
   return _parseImageFiletoWords(url)
@@ -38,12 +38,10 @@ _searchAPIForArtist = function(array){
     });
 };
 
-
 _parseImageFiletoWords = function(file) {
   return _sendFileToOcr(file)
     .then(_parseLines);
 };
-
 
 _sendFileToOcr = function(file) {
   return new Promise(function(resolve,reject) {
@@ -66,7 +64,6 @@ _buildRequest = function(file, form) {
   form.append('apikey', ocrKey);
   form.append('isOverlayRequired', 'true');
 };
-
 
 _parseLines = function(inputJSON) {
   return JSON.parse(inputJSON)

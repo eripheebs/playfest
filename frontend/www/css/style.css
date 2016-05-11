@@ -2,17 +2,20 @@ body{
   margin: auto;
   text-align: center;
   font-family: Avenir, sans-serif;
-  /*background: linear-gradient(left, #F8B195, #355C7D);*/
+}
+
+.ion-pane{
   background: -webkit-linear-gradient(left, #F8B195, #355C7D);
-  /*background: black;*/
 }
 
-input{
-  margin: 0px auto;
-  font-family: Quicksand;
+.bar.bar-header.bar-light{
+  height: 50px;
+  background: rgba(225, 225, 225, .5);
 }
 
-input#new-festival-input{
+.button.button-stable.button-outline{
+  font-family: Avenir, sans-serif;
+  color: black;
   border: 1px solid black;
   text-align: center;
 }
@@ -21,8 +24,21 @@ h1{
   font-family: Avenir, sans-serif;
 }
 
-button{
+.login{
+  margin-top: 3px;
   font-family: Avenir, sans-serif;
+  background-color: transparent;
+  text-align: center;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+}
+
+.button{
+  font-family: Avenir, sans-serif;
+  border: 4px solid black;
+  text-align: center;
 }
 
 #create{

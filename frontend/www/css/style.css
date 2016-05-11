@@ -1,7 +1,10 @@
 body{
   margin: auto;
   text-align: center;
-  font-family: Quicksand;
+  font-family: Avenir, sans-serif;
+  /*background: linear-gradient(left, #F8B195, #355C7D);*/
+  background: -webkit-linear-gradient(left, #F8B195, #355C7D);
+  /*background: black;*/
 }
 
 input{
@@ -15,11 +18,11 @@ input#new-festival-input{
 }
 
 h1{
-  font-family: Quicksand;
+  font-family: Avenir, sans-serif;
 }
 
 button{
-  font-family: Quicksand;
+  font-family: Avenir, sans-serif;
 }
 
 #create{

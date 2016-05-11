@@ -9,19 +9,18 @@ var ocrKey = process.env.OCR_KEY;
 var rest = require('restler');
 
 router.post('/',upload.single('poster'), function(req,res){
-  model.sendFileToOcr(req.file)
-    .then(function(data){
-      console.log("return!", data);
+  model.parseImage(req.file)
+    .then(function(artistList) {
+      res.status(200).send(artistList);
+      //call playlist_creation(artistList) here.
     });
 });
-
 
 router.post('/test',upload.single('file'), function(req,res){
   console.log('bounce file', req.file);
   console.log('bounce body', req.body);
   console.log('BREAKBREAKBREAK');
 });
-
 
 router.get('/', function(req,res){
   console.log("THIS IS A DEBUGGING ROUTE");

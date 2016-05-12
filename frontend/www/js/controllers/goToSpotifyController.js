@@ -4,26 +4,27 @@ playfestApp.controller('goToSpotifyController', function($scope, $cordovaInAppBr
 
   function onDeviceReady() {
     console.log(device.cordova);
+  }
+
+  spotifyLogin = function() {
+    console.log("trying to login to spotify!");
+    $location.path('https://google.com');
   };
 
   $scope.launchSpotify = function(){
-    var scheme;
-
-    if(device.platform === 'iOS') {
-        scheme = 'spotify://';
-    } else if(device.platform === 'Android') {
-        scheme = 'com.spotify.android';
-    };
-
+    var scheme = 'com.spotify.music';
+    console.log("checking for ", scheme);
     appAvailability.check(
-      scheme,
-      function() {
-          window.open('spotify://', '_system', 'location=no');
-          console.log('Twitter is available');
-      },
-      function() {
-          window.open('https://spotify.com/', '_system', 'location=no');
-          console.log('Twitter is not available');
-      });
+    scheme,
+    function() {  // Success callback
+        console.log(scheme + ' is available :)');
+        window.open('spotify://', '_system', 'location=no');
+
+    },
+    function() {  // Error callback
+        console.log(scheme + ' is not available :(');
+    });
+
   };
+
 });

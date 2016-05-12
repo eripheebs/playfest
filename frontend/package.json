@@ -10,7 +10,8 @@
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
-    "gulp-sass": "^2.0.4"
+    "gulp-sass": "^2.0.4",
+    "ng-cordova": "^0.1.26-alpha"
   },
   "devDependencies": {
     "bower": "^1.3.3",

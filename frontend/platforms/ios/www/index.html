@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Playfest App</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers/playfestController.js"></script>
+    <script src="js/controllers/pictureController.js"></script>
+    <script src="js/controllers/goToSpotifyController.js"></script>
+    <script src="js/services/talkToBackendService.js"></script>
+
+  </head>
+  <body ng-app="playfestApp">
+
+    <ion-pane class='ion-pane' ng-controller='goToSpotifyController as spotCtrl'>
+      <ion-header-bar class="bar bar-header bar-light">
+        <div class="buttons">
+          <form>
+            <button class="login" ng-click="spotCtrl.spotifyLogin()">Login</button>
+          </form>
+        </div>
+        <div class="logo">
+          <img src="img/playfest-logo-2.png" style="width:80px";>
+        </div>
+      </ion-header-bar>
+      <ion-content>
+        <div id='playlist' ng-controller='playfestController as ctrl'>
+          <div class="list list-inset">
+            <label class="item item-input">
+              <i class="icon ion-headphone placeholder-icon"></i>
+              <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
+            </label>
+          </div>
+          <div id='picture' ng-controller="pictureCtrl as picCtrlr">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+            <button class="button button-outline button-stable" ng-click="takePicture().then(addArrayVar)">TAKE PICTURE</button>
+          </div>
+          <div id="create" class="buttons">
+          <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
+          </div>
+            <p id='confirmation'>{{confirmationData}}</p>
+        </div>
+        <div>
+          <button class="button button-outline button-balanced" ng-click="launchSpotify()">
+            <i class="ion-ios-musical-notes"></i>
+            GO TO SPOTIFY
+          </button>
+        </div>
+      </ion-content>
+    </ion-pane>
+  </body>
+</html>

@@ -3,15 +3,12 @@ playfestApp.service('TalkToBackendService', ['$http', function($http){
 
   function _handleResponseFromApi(response){
     return response.data;
-  };
+  }
 
   self.makePlaylist = function(data){
-    return $http.post('http://localhost:5000/spotifyPlaylist/new', data)
+    return $http.post('https://agile-refuge-70787.herokuapp.com/poster/upload', data)
       .then(_handleResponseFromApi);
   };
 
-  self.login = function(){
-    return $http.redirect('http://localhost:5000/auth/new');
-  }
 
-}])
+}]);

@@ -1,27 +1,73 @@
 body{
   margin: auto;
   text-align: center;
-  font-family: Quicksand;
+  font-family: Avenir, sans-serif;
 }
 
-input{
-  margin: 0px auto;
-  font-family: Quicksand;
+.ion-pane{
+  background: -webkit-linear-gradient(left, #F8B195, #355C7D);
 }
 
-input#new-festival-input{
+.list.list-inset{
+  background-color: rgba(225, 225, 225, .0);
+  font-family: Avenir, sans-serif;
+  color: black;
+  opacity: 0.8;
+
+}
+
+.item.item-input{
+  background-color: rgba(225, 225, 225, .0);
+}
+
+::-webkit-input-placeholder {
+  font-family: Avenir, sans-serif;
+  color: black !important;
+  opacity: 0.5;
+}
+
+i.icon.ion-headphone.placeholder-icon{
+  color: black !important;
+  opacity: 0.5;
+}
+
+.bar.bar-header.bar-light{
+  height: 50px;
+  background: rgba(225, 225, 225, .5);
+}
+
+.button.button-stable.button-outline{
+  font-family: Avenir, sans-serif;
+  color: black;
   border: 1px solid black;
   text-align: center;
+  opacity: 0.5;
 }
 
-h1{
-  font-family: Quicksand;
+.logo{
+  position: absolute;;
+  top: 0;
+  right: 0;
+  margin: 5px 5px 0px 0px;
 }
 
-button{
-  font-family: Quicksand;
+.login{
+  margin-top: 3px;
+  font-family: Avenir, sans-serif;
+  background-color: transparent;
+  text-align: center;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
 }
 
 #create{
   margin: 20px 20px 20px 20px;
+}
+
+#confirmation{
+  font-family: Avenir, sans-serif;
+  color: black;
+  opacity: 0.5;
 }

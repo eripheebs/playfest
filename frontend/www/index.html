@@ -18,6 +18,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/playfestController.js"></script>
     <script src="js/controllers/pictureController.js"></script>
+    <script src="js/controllers/goToSpotifyController.js"></script>
     <script src="js/services/talkToBackendService.js"></script>
 
   </head>
@@ -42,14 +43,20 @@
               <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
             </label>
           </div>
-          <div id='picture' ng-controller="pictureCtrl as ctrlr">
+          <div id='picture' ng-controller="pictureCtrl as picCtrlr">
             <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-            <button class="button button-outline button-stable" ng-click="takePicture()">TAKE PICTURE</button>
+            <button class="button button-outline button-stable" ng-click="takePicture().then(addArrayVar)">TAKE PICTURE</button>
           </div>
           <div id="create" class="buttons">
           <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
           </div>
             <p id='confirmation'>{{confirmationData}}</p>
+        </div>
+        <div ng-controller='goToSpotifyController as spotCtrl'>
+          <button class="button button-outline button-balanced" ng-click="launchSpotify()">
+            <i class="ion-ios-musical-notes"></i>
+            GO TO SPOTIFY
+          </button>
         </div>
       </ion-content>
     </ion-pane>

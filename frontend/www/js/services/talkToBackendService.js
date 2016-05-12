@@ -6,7 +6,8 @@ playfestApp.service('TalkToBackendService', ['$http', function($http){
   }
 
   self.makePlaylist = function(data){
-    return $http.post('https://agile-refuge-70787.herokuapp.com/poster/upload', data)
+    console.log("backend, sending", data);
+    return $http.post('https://agile-refuge-70787.herokuapp.com/spotifyPlaylist/new', data)
       .then(_handleResponseFromApi);
   };
 

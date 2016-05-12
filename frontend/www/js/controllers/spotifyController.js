@@ -1,4 +1,4 @@
-playfestApp.controller('goToSpotifyController', function($scope, $cordovaInAppBrowser) {
+playfestApp.controller('spotifyController', function($scope, $cordovaInAppBrowser) {
 
   document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -6,8 +6,16 @@ playfestApp.controller('goToSpotifyController', function($scope, $cordovaInAppBr
     console.log(device.cordova);
   }
 
-  spotifyLogin = function() {
-    $location.path('https://google.com');
+  $scope.pleaseQuack = function() {
+    console.log('logging to spotify');
+    var authProcess = cordova.InAppBrowser.open("https://agile-refuge-70787.herokuapp.com/auth/new", "_self");
+    authProcess.addEventListener('loadstop', function(event) {
+      if(event.url === 'http://localhost:8100/')
+        {
+          console.log('login completed!');
+          authProcess.close();
+        }
+    });
   };
 
   $scope.launchSpotify = function(){

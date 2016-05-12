@@ -19,17 +19,16 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/playfestController.js"></script>
     <script src="js/controllers/pictureController.js"></script>
-    <script src="js/controllers/goToSpotifyController.js"></script>
+    <script src="js/controllers/spotifyController.js"></script>
     <script src="js/services/talkToBackendService.js"></script>
 
   </head>
   <body ng-app="playfestApp">
 
-    <ion-pane class='ion-pane' ng-controller='goToSpotifyController as spotCtrl'>
+    <ion-pane class='ion-pane' ng-controller='spotifyController as spotCtrl'>
       <ion-header-bar class="bar bar-header bar-light">
         <div class="buttons">
           <form>
-            <button class="login" ng-click="spotCtrl.spotifyLogin()">Login</button>
           </form>
         </div>
         <div class="logo">
@@ -37,30 +36,32 @@
         </div>
       </ion-header-bar>
       <ion-content>
-        <div id='playlist' ng-controller='playfestController as ctrl'>
-          <div class="list list-inset">
-            <label class="item item-input">
-              <i class="icon ion-headphone placeholder-icon"></i>
-              <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
-            </label>
+        <div ng-model="arrayVar">
+          <div id='playlist' ng-controller='playfestController as ctrl'>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-headphone placeholder-icon"></i>
+                <input type='text' id='new-playlist-input' placeholder='Name Your Playlist' ng-model='playlistName'/>
+              </label>
+            </div>
+            <div id='picture' ng-controller="pictureCtrl as picCtrlr">
+              <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+              <button class="button button-outline button-stable" ng-click="pleaseQuack()">LOGIN</button>
+              <button class="button button-outline button-stable" ng-click="takePicture().then(ctrl.addArrayVar)">TAKE PICTURE</button>
+            </div>
+            <div id="create" class="buttons">
+            <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
+            </div>
+            <ul>
+              <li id='confirmation' ng-repeat="art in arrayVar track by $index">{{art}}</li>
+            </ul>
           </div>
-          <div id='picture' ng-controller="pictureCtrl as picCtrlr">
-            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-            <button class="button button-outline button-stable" ng-click="takePicture().then(ctrl.addArrayVar)">TAKE PICTURE</button>
+          <div>
+            <button class="button button-outline button-balanced" ng-click="launchSpotify()">
+              <i class="ion-ios-musical-notes"></i>
+              GO TO SPOTIFY
+            </button>
           </div>
-    <ul>
-      <li ng-repeat='artist in arrayVar track by $index'>{{artist}}</li>
-    </ul>
-          <div id="create" class="buttons">
-          <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
-          </div>
-            <p id='confirmation'>{{confirmationData}}</p>
-        </div>
-        <div>
-          <button class="button button-outline button-balanced" ng-click="launchSpotify()">
-            <i class="ion-ios-musical-notes"></i>
-            GO TO SPOTIFY
-          </button>
         </div>
       </ion-content>
     </ion-pane>

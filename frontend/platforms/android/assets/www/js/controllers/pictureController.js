@@ -1,5 +1,7 @@
 playfestApp.controller('pictureCtrl', ['$scope','$cordovaCamera','Upload',function($scope, $cordovaCamera, Upload) {
 
+
+
   $scope.takePicture = function() {
 
           var options = {
@@ -9,12 +11,13 @@ playfestApp.controller('pictureCtrl', ['$scope','$cordovaCamera','Upload',functi
               allowEdit : true,
               encodingType: Camera.EncodingType.JPEG,
               targetWidth: 300,
-              targetHeight: 300,
+              targetHeight: 500,
               popoverOptions: CameraPopoverOptions,
               saveToPhotoAlbum: false
           };
 
     return $cordovaCamera.getPicture(options).then(function(imageData){
+      $scope.imgURI = "data:image/jpeg;base64," + imageData;
       Upload.upload({
                  url: 'https://agile-refuge-70787.herokuapp.com/poster/upload',
                  method: 'POST',
@@ -22,7 +25,8 @@ playfestApp.controller('pictureCtrl', ['$scope','$cordovaCamera','Upload',functi
              })
         .then(function(response) {
           console.log("reply received with", response);
-          $scope.arrayVar = response.body;
+          $scope.arrayVar = response.data;
+          console.log("adata is now", $scope.arrayVar);
         }, function(error){
           console.log("error uploading received", error);
         }, function(evt){

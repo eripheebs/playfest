@@ -8,17 +8,32 @@ body{
   background: -webkit-linear-gradient(left, #F8B195, #355C7D);
 }
 
+.list.list-inset{
+  background-color: rgba(225, 225, 225, .0);
+  font-family: Avenir, sans-serif;
+  color: black;
+  opacity: 0.8;
+
+}
+
 .item.item-input{
-  background: rgba(225, 225, 225, .2);
+  background-color: rgba(225, 225, 225, .0);
+}
+
+::-webkit-input-placeholder {
+  font-family: Avenir, sans-serif;
+  color: black !important;
+  opacity: 0.5;
+}
+
+i.icon.ion-headphone.placeholder-icon{
+  color: black !important;
+  opacity: 0.5;
 }
 
 .bar.bar-header.bar-light{
   height: 50px;
   background: rgba(225, 225, 225, .5);
-}
-
-.logo{
-  padding-left: 63%;
 }
 
 .button.button-stable.button-outline{
@@ -29,8 +44,11 @@ body{
   opacity: 0.5;
 }
 
-h1{
-  font-family: Avenir, sans-serif;
+.logo{
+  position: absolute;;
+  top: 0;
+  right: 0;
+  margin: 5px 5px 0px 0px;
 }
 
 .login{
@@ -43,7 +61,6 @@ h1{
   cursor:pointer;
   overflow: hidden;
 }
-
 
 #create{
   margin: 20px 20px 20px 20px;

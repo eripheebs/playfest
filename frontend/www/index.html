@@ -23,12 +23,13 @@
     <script src="js/services/talkToBackendService.js"></script>
 
   </head>
-  <body ng-app="playfestApp">
+  <body ng-app="playfestApp" ng-controller='playfestController as ctrl'>
 
     <ion-pane class='ion-pane' ng-controller='spotifyController as spotCtrl'>
       <ion-header-bar class="bar bar-header bar-light">
         <div class="buttons">
           <form>
+            <button class="button button-outline button-stable" ng-click="pleaseQuack()">LOGIN</button>
           </form>
         </div>
         <div class="logo">
@@ -46,15 +47,12 @@
             </div>
             <div id='picture' ng-controller="pictureCtrl as picCtrlr">
               <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
-              <button class="button button-outline button-stable" ng-click="pleaseQuack()">LOGIN</button>
               <button class="button button-outline button-stable" ng-click="takePicture().then(ctrl.addArrayVar)">TAKE PICTURE</button>
             </div>
             <div id="create" class="buttons">
             <button id='new-playlist-button' class="button button-outline button-stable" ng-click='createPlaylist(playlistName)'>CREATE PLAYLIST</button>
             </div>
-            <ul>
-              <li id='confirmation' ng-repeat="art in arrayVar track by $index">{{art}}</li>
-            </ul>
+            <p id='confirmation'>{{confirmationData}}</p>
           </div>
           <div>
             <button class="button button-outline button-balanced" ng-click="launchSpotify()">

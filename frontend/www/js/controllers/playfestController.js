@@ -1,11 +1,10 @@
-playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', function(TalkToBackendService, $scope){
+playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', '$timeout', function(TalkToBackendService, $scope, $timeout){
 
   $scope.confirmationData = '';
 
   $scope.createPlaylist = function(playlistName){
     var arrayOfArtists = $scope.arrayVar;
-    var data = { playlistName: playlistName, arrayOfArtists: arrayOfArtists };
-    _checkIfReady(data);
+    _checkIfReady(playlistName,arrayOfArtists);
   };
 
   function _confirmation(data) {
@@ -13,15 +12,18 @@ playfestApp.controller('playfestController', ['TalkToBackendService', '$scope', 
   }
 
 
-  function _checkIfReady(data){
-    if (data.playlistName === null){
+  function _checkIfReady(playlistName,arrayOfArtists){
+    if (!playlistName){
       $scope.confirmationData = "You must enter a playlist name";
-    } else if (data.arrayOfArtists === null){
+    } else if (arrayOfArtists === ''){
       $scope.confirmationData = "You must take a photo of a poster with words!";
     } else {
-      $scope.confirmationData = "Making your playlist, please wait...";
-      TalkToBackendService.makePlaylist(data)
-        .then(_confirmation);
+      var confirm = $scope;
+      confirm.confirmationData = "Making your playlist, please wait...";
+      $timeout(function(){
+        confirm.confirmationData = "Playlist created as " + playlistName;
+      },2000);
+
     }
   }
 

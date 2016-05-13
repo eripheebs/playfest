@@ -8,7 +8,7 @@ playfestApp.controller('spotifyController', function($scope, $cordovaInAppBrowse
 
   $scope.pleaseQuack = function() {
     console.log('logging to spotify');
-    var authProcess = cordova.InAppBrowser.open("https://agile-refuge-70787.herokuapp.com/auth/new", "_self");
+    var authProcess = cordova.InAppBrowser.open("https://agile-refuge-70787.herokuapp.com/auth/new", "_self","clearcache=yes");
     authProcess.addEventListener('loadstop', function(event) {
       if(event.url === 'http://localhost:8100/')
         {

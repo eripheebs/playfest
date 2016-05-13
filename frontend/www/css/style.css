@@ -5,7 +5,7 @@ body{
 }
 
 .ion-pane{
-  background: -webkit-linear-gradient(left, #F8B195, #355C7D);
+  background: -webkit-linear-gradient(left, #FCC6B1, #6284A1);
 }
 
 .list.list-inset{
@@ -36,10 +36,27 @@ i.icon.ion-headphone.placeholder-icon{
   background: rgba(225, 225, 225, .5);
 }
 
+#login{
+  border: none;
+  font-size: 18px;
+  padding-top: 5px;
+}
+
 .button.button-stable.button-outline{
   font-family: Avenir, sans-serif;
   color: black;
-  border: 1px solid black;
+  font-weight: bold;
+  border: 2px solid black;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.button.button-outline.button-balanced{
+  font-family: Avenir, sans-serif;
+  color: black;
+  font-weight: bold;
+  border: 2px solid black;
+  /*background-color: #81b71a;*/
   text-align: center;
   opacity: 0.5;
 }
@@ -68,6 +85,9 @@ i.icon.ion-headphone.placeholder-icon{
 
 #confirmation{
   font-family: Avenir, sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
   color: black;
   opacity: 0.5;
+  font-weight: bold;
 }

@@ -14,8 +14,6 @@ var passportSetup = require('./models/auth.js');
 
 app.use(session({secret: "Jazzy is the cutest"}));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());

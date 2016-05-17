@@ -5,7 +5,7 @@ Playfest is an app in which the user can take a picture via their phone camera o
 ### Watch a demo:
 https://www.youtube.com/watch?v=OAF3pvoFZVU&feature=youtu.be
 
-![Screenshot of PlayfestApp](https://cloud.githubusercontent.com/assets/16217360/15324911/5f1f08da-1c40-11e6-9f33-04ba9263ad1c.png)
+![Screenshot of PlayfestApp](https://cloud.githubusercontent.com/assets/16217360/15324911/5f1f08da-1c40-11e6-9f33-04ba9263ad1c.png =250x)
 
 ### To set up:
 ```

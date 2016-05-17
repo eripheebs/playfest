@@ -1,33 +1,67 @@
-Playfest
+# Playfest
 
+Playfest is an app in which the user can take a picture via their phone camera of a festival or concert photo, log in to Spotify and get a playlist with top ten songs of artists displayed on that festival poster. It uses an optical character recognition API and the spotify API. The backend is built with Express and Node.js, and the frontend with Ionic which uses AngularJS.
 
-To set up:
-1. fork the repo
-2. npm install
-3. (if you don't already have these packages installed globally)
-  npm install -g .. blah blah..
-4. cd frontend
-5. npm install && bower install (required for Ionic dependencies)
+### Watch a demo:
+https://www.youtube.com/watch?v=OAF3pvoFZVU&feature=youtu.be
 
-To run tests:
-1. mocha test/backend
-2. karma start test/karma.conf.js
-protractor:
-1. webdriver-manager update
-2. webdriver-manager start
-3. (in a different console tab) node backend/server.js
-4. (in a different console tab)
-  cd frontend
-  ionic serve
-  protractor test/protractor.conf.js
+![Screenshot of PlayfestApp](https://cloud.githubusercontent.com/assets/16217360/15324911/5f1f08da-1c40-11e6-9f33-04ba9263ad1c.png)
 
-To view simulator:
-1. cd frontend
+### To set up:
+```
+$ git clone https://github.com/eripheebs/playfest.git
+$ cd playfest
+$ npm install
+$ cd frontend
+$ npm install
+$ bower install
+```
+
+### To run the app:
+```
+$ cd playfest
+$ export to $CLIENT_SECRET your spotify client key
+$ node server/server.js
+$ cd frontend
+$ ionic serve
+```
+* host will be running on $PORT or 5000 (default)
+
+### To view frontend in simulator:
+```
+$ cd frontend
 $ ionic platform add ios
 $ ionic build ios
 $ ionic emulate ios
+```
 
-To run backend:
-1. export to $CLIENT_SECRET the key from spotify
-2. run $ node server/server.js
-3. host will be running on $PORT or 5000 (default)
+### To run tests:
+```
+$ cd playfest
+```
+Mocha tests for the backend:
+```
+$ Mocha test/backend
+```
+Karma tests for the ionic frontend:
+```
+$ karma start test/karma.conf.js
+```
+Protractor integration tests:
+```
+$ webdriver-manager update
+$ webdriver-manager start
+```
+* In a different console tab:
+```
+$ node backend/server.js
+```
+* In a different console tab:
+```
+$ cd frontend
+$ ionic serve
+```
+* In a different console tab:
+```
+$ protractor test/protractor.conf.js
+```

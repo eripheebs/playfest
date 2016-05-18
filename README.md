@@ -32,7 +32,7 @@ $ ionic serve
 ```
 * host will be running on $PORT or 5000 (default)
 
-### To view frontend in simulator
+### To view frontend in simulator (ios/android)
 ```
 $ cd frontend
 $ ionic platform add ios

@@ -1,7 +1,7 @@
 var SpotifyWebApi = require('spotify-web-api-node');
 
 var scopes = ['playlist-read-private', 'playlist-modify-public', 'playlist-modify-private'],
-  clientId = "873379a32a354918b0a54f4f79736716",
+  clientId = process.env.CLIENT_ID,
   clientSecret = process.env.CLIENT_SECRET,
   state = 'jazz-and-eri-women-powahhh';
 

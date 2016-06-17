@@ -25,7 +25,8 @@ $ bower install
 ### To run the app
 ```
 $ cd playfest
-$ export to $CLIENT_SECRET your spotify client key
+$ export to $CLIENT_ID your spotify client id key
+$ export to $CLIENT_SECRET your spotify client secret key
 $ node server/server.js
 $ cd frontend
 $ ionic serve

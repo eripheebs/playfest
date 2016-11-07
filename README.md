@@ -47,7 +47,7 @@ $ cd playfest
 ```
 Mocha tests for the backend:
 ```
-$ Mocha test/backend
+$ mocha test/backend
 ```
 Karma tests for the ionic frontend:
 ```

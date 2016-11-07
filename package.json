@@ -40,6 +40,7 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "ionic": "^1.7.14",
+    "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-spotify": "^0.3.0",
     "request": "^2.72.0",

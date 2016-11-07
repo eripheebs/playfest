@@ -34,7 +34,6 @@ describe('Spotify Playlist', function(){
         expect(methodResult).to.equal(confirmationString)
       });
     });
-
   });
 
 });
